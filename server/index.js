@@ -21,19 +21,18 @@ app.use("/api", brandRouter);
 app.use("/api", productRouter);
 app.use("/api", concertRouter);
 
-// --------- Додано для React статики ---------
-const clientBuildPath = path.join(__dirname, "../client/build");
+// --------- Віддача React фронтенду у продакшн ---------
+if (process.env.NODE_ENV === "production") {
+  const clientBuildPath = path.join(__dirname, "../client/build");
+  app.use(express.static(clientBuildPath));
 
-// Роздача статики з React build
-app.use(express.static(clientBuildPath));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+}
+// ------------------------------------------------------
 
-// Всі інші маршрути віддають index.html (щоб працював React Router)
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(clientBuildPath, "index.html"));
-});
-// --------------------------------------------
-
-app.listen(PORT, () => console.log(`server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
 /*const express = require("express")
@@ -68,3 +67,10 @@ app.use("/api", productRouter)
 app.listen(PORT, () => console.log(`server started on port ${PORT}` ))
 
 */
+
+
+
+
+/*
+
+*/ 
