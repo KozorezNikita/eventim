@@ -1,0 +1,211 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 🔹 Логотип */
+.logo-img {
+  display: block;
+  height: 36px;
+  width: auto;
+  transform: translateY(-9px); /* піднімаємо логотип, щоб зірочка не опускала центр */
+}
+
+/* 🔹 Місто */
+.city-wrapper {
+  position: relative;
+}
+
+.city {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #282828;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.location-icon {
+  margin-right: 6px;
+  display: inline-block;
+}
+
+.city-name {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.city-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.8px; /* тонке підкреслення */
+  background-color: black;
+  border-radius: 1px;
+  opacity: 0.9;
+}
+
+/* 🔽 Випадаючий список міст */
+.city-dropdown {
+  position: absolute;
+  top: 28px;
+  left: 24px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  min-width: 120px;
+  z-index: 20;
+  animation: fadeIn 0.15s ease-in-out;
+}
+
+.city-dropdown li {
+  padding: 6px 14px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.city-dropdown li:hover {
+  background: #f2f2f2;
+}
+
+.city-dropdown li.active {
+  font-weight: 600;
+  background: #f8f8f8;
+}
+
+/* 🔍 Пошук */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search {
+  padding: 8px 36px 8px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 180px;
+  color: #333;
+  background-color: #2828280D;
+}
+
+.search::placeholder {
+  color: #999;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+/* 🌐 Мови */
+.lang {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
+
+/* 🍔 Бургер */
+.hamburger {
+  display: none;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* 🔗 Навігація */
+.nav a {
+  margin: 0 12px;
+  text-decoration: none;
+  color: #282828;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Адаптація для мобільних */
+@media (max-width: 420px) {
+  .header {
+    padding: 12px 16px;
+  }
+
+  .logo-img {
+    height: 30px;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    z-index: 10;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .header-right .search-wrapper,
+  .header-right .lang {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    cursor: pointer;
+  }
+}

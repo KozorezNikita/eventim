@@ -1,0 +1,67 @@
+.contacts-block {
+  display: flex;
+  justify-content: space-between; /* основне вирівнювання */
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #f9f9f9;
+  color: #282828;
+  flex-wrap: wrap; /* для адаптивності */
+  gap: 30px;
+}
+
+.contacts-left {
+  flex: 1 1 300px;
+  max-width: 475px; /* мінімальна ширина 300px */
+}
+
+.contacts-right {
+  flex: 0 0 auto;        /* блок не розтягується */
+  margin-left: auto;      /* штовхає блок вправо */
+  text-align: right;      /* текст всередині вирівнюємо по правому краю */
+  min-width: 200px;       /* мінімальна ширина */
+}
+
+.contacts-left h3,
+.contacts-right h3 {
+  font-size: 20px;
+  margin: 20px 0; /* верхній і нижній відступ по 20px */
+  color: #1a1a1a;
+}
+
+.contacts-left p, .contacts-right p {
+  margin: 6px 0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+
+
+@media (max-width: 420px) {
+  .contacts-block {
+    display: flex;
+    flex-direction: column; /* блоки один під одним */
+    align-items: center;    /* центруємо блоки по горизонталі */
+    text-align: center;     /* текст всередині блоків */
+    gap: 20px;
+    padding: 20px 15px;
+  }
+
+  .contacts-left,
+  .contacts-right {
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-left: 0;       /* прибираємо відступи */
+    text-align: center;   /* центруємо текст */
+  }
+
+  .contacts-left h3,
+  .contacts-right h3 {
+    font-size: 18px;
+  }
+
+  .contacts-left p,
+  .contacts-right p {
+    font-size: 15px;
+    margin: 4px 0;
+  }
+}

@@ -1,0 +1,67 @@
+.logo-block {
+  display: flex;               
+  align-items: center;         
+  justify-content: space-between; 
+  flex-wrap: nowrap;
+  padding: 40px;
+
+  overflow-x: auto;            /* горизонтальний скрол */
+  -webkit-overflow-scrolling: touch; /* плавний скрол на iOS */
+  scroll-behavior: smooth;
+
+  /* приховати скролбар */
+  scrollbar-width: none;       /* Firefox */
+}
+
+.logo-block::-webkit-scrollbar {
+  display: none;               /* Chrome, Safari, Edge */
+}
+
+.logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto; /* не стискати логотипи у скролі */
+  margin-right: 20px;
+}
+
+.logo-block .logo-item:first-child img {
+  transform: translateY(-20px);
+}
+
+.logo-item img {
+  height: 50px;
+  width: auto;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.logo-item img:hover {
+  transform: scale(1.1);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .logo-block {
+    justify-content: flex-start; 
+    padding: 20px 10px;
+  }
+
+  .logo-block .logo-item:first-child img {
+  transform: translateY(-15px);
+}
+
+  .logo-item img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-block {
+    padding: 15px 10px;
+  }
+
+  .logo-item img {
+    height: 30px;
+  }
+}

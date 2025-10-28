@@ -1,0 +1,117 @@
+.navfoot {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Перший рядок */
+.navfoot-top {
+  text-align: center;
+}
+
+.navfoot-top .logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.navfoot-top .plus {
+  color: #e60000;
+  margin-left: 2px;
+}
+
+/* Другий рядок */
+.navfoot-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Навігація в лівому куті */
+.navfoot-nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.navfoot-nav a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+/* Місто і мова — у правому куті */
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-right .city {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+}
+
+.footer-right .location-icon {
+  margin-right: 6px;
+  font-size: 18px;
+}
+
+.footer-right .lang {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  cursor: pointer;
+}
+@media (max-width: 420px) {
+  .navfoot {
+    padding: 20px 15px;
+    gap: 10px;
+  }
+
+  /* Логотип по центру */
+  .navfoot-top .logo {
+    font-size: 24px;
+  }
+
+  /* Приховуємо навігаційні лінки */
+  .navfoot-nav {
+    display: none;
+  }
+
+  /* Другий рядок — геолокація зліва, селект справа */
+  .navfoot-bottom {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .footer-right .city {
+    font-size: 16px;
+    color: #555;
+    font-weight: 500;
+  }
+
+  .footer-right .location-icon {
+    font-size: 16px;
+    margin-right: 6px;
+  }
+
+  .footer-right .lang {
+    margin-left: auto; /* селект справа */
+  }
+}

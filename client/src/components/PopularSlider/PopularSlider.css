@@ -1,0 +1,395 @@
+/* ====== Секція popular ====== */
+.popular {
+  padding: 40px;
+  background: #f9f9f9;
+  position: relative;
+  font-family: "Inter", sans-serif;
+}
+
+.popular-title {
+  font-family: "Inter", sans-serif;
+  font-size: 48px; /* потрібний розмір */
+  font-weight: bold;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  background: #D31F37;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+/* ====== Слайдер ====== */
+.slider {
+  position: relative;
+  height: 400px; /* фіксована висота слайдера */
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ====== Картка ====== */
+.popular-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  background: #000; /* fallback */
+}
+
+.popular-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  filter: blur(15px);
+  z-index: 0;
+}
+
+.popular-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* темний напівпрозорий шар */
+  z-index: 0;
+}
+
+
+.popular-info,
+.popular-image {
+  position: relative;
+  z-index: 1; /* контент поверх фону */
+}
+
+.popular-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 15px 50px;
+  color: #fff;
+  position: relative;
+}
+
+/* 🔹 Верхня частина (title + location) */
+.info-top {
+  margin-top: 15px;
+}
+
+.info-top h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.info-top p {
+  font-size: 18px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+/* 🔹 Нижня частина (дата, ціна, кнопка) */
+.info-bottom {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* збільшено відстань між датою та ціною */
+  color: #ccc;
+}
+
+.details .date,
+.details .price {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* невеликий відступ між символом і текстом */
+  font-size: 18px;
+}
+
+/* 🔹 Кнопка */
+.buy-btn {
+  width: 70%;
+  background: #D31F37;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.buy-btn:hover {
+  background: #D31F37;
+}
+
+.popular-image {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popular-image img {
+  width: 540px;
+  height: 360px;    /* однакова висота (90% від 400px слайду) */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ====== Кнопки слайдера ====== */
+.controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.controls button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #D31F37;
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  pointer-events: all;
+  transition: background 0.3s;
+}
+
+.controls button:hover {
+  background: #b80000;
+}
+
+.controls .prev {
+  left: 0;
+}
+
+.controls .next {
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 420px) {
+
+  .popular {
+    padding: 20px 15px;
+  }
+
+  .slider {
+    position: relative;
+    min-height: 550px; /* висота слайду під мобільний */
+  }
+
+  .slide {
+    position: absolute; /* залишаємо для анімації */
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .popular-card {
+    flex-direction: column;
+    padding: 0;
+    height: 500px; /* підлаштовується під весь контент */
+    position: relative;
+  }
+
+  .popular-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bg-img);
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px);
+    z-index: 0;
+  }
+
+  .popular-image {
+    order: 0;
+    width: 100%;
+    max-width: 360px; /* фіксована ширина картинки */
+    height: 200px;     /* фіксована висота */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;    /* центрована картинка */
+    z-index: 1;
+  }
+
+  .popular-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* обрізає зайве, не деформуючи */
+    border-radius: 12px;
+  }
+
+  .popular-info {
+    order: 1;
+    padding: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    color: #fff;
+    height: auto;
+  }
+
+  .info-top {
+    margin-top: 15px;
+  }
+
+  .info-top h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .info-top p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.4;
+  }
+
+  .info-bottom {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    color: #aaa;
+  }
+
+  .details .date,
+  .details .price {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* відступ між іконкою і текстом */
+  }
+
+  /* кнопка */
+  .buy-btn {
+    width: 100%; /* розтягнути на ширину контейнера */
+    margin: 16px 0;
+    padding: 14px 0;
+    font-size: 14px;
+    border-radius: 6px;
+    background: #D31F37;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .buy-btn:hover {
+    background: #D31F37;
+  }
+
+  /* стрілки */
+  .controls {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 300px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .controls button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    pointer-events: all;
+    background: #D31F37;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .controls .prev {
+    left: 10px;
+  }
+
+  .controls .next {
+    right: 10px;
+  }
+
+  .controls button:hover {
+    background: #b80000;
+  }
+}

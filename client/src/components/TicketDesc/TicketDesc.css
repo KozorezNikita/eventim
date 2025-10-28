@@ -1,0 +1,187 @@
+.ticket-description {
+  padding: 40px;
+  background: #f9f9f9;
+  position: relative;
+  font-family: "Inter", sans-serif;
+  padding-bottom: 100px;
+}
+
+.ticket-title {
+  font-family: "Inter", sans-serif;
+  font-size: 48px; /* потрібний розмір */
+  font-weight: bold;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.ticket-dot {
+  width: 18px;
+  height: 18px;
+  background: #D31F37;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+
+/* Заголовок концерту після доту */
+.concert-header {
+  font-size: 18px; /* можна підкоригувати за потреби */
+  font-weight: bold;
+  margin-bottom: 24px; /* відступ між заголовком і абзацами */
+  line-height: 1.3;
+}
+
+/* Абзаци опису концерту */
+.ticket-description p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 16px; /* відступ між абзацами */
+}
+
+/* Останній абзац не має нижнього відступу */
+.last-p {
+  padding-bottom: 40px; /* відступ останнього абзацу */
+}
+
+.ticket-options {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* відступ між рядками */
+}
+
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.ticket-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ticket-price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.ticket-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-quantity button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cart-button {
+  position: absolute;
+  background-color: #D31F37; /* червона заливка */
+  color: white;              /* білий колір тексту */
+  font-size: 18px;           /* шрифт 18px */
+  border: none;              /* без рамки */
+  padding: 12px 24px;        /* внутрішні відступи */
+  cursor: pointer;           /* курсор у вигляді руки */
+  border-radius: 6px;        /* закруглені кути */         
+  transition: 0.2s all; 
+  right: 10%;  
+  margin-top: 20px;
+  margin-bottom: 40px;  /* плавна анімація при ховері */
+  cursor: pointer; 
+  min-width: 360px;
+}
+
+.cart-button:hover {
+  background-color: #e04e52; /* світліший червоний при наведенні */
+}
+
+
+
+/* Мобільна адаптація для екранів <= 420px */
+@media (max-width: 420px) {
+  .ticket-description {
+    padding: 20px;
+    padding-bottom: 120px; /* щоб кнопка не злипалась із низом */
+  }
+
+  .ticket-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .concert-header {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .ticket-description p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .ticket-options {
+    gap: 12px;
+    width: 100%;          /* щоб не виходив за межі */
+    overflow-x: hidden;   /* запобігає горизонтальному скролу */
+  }
+
+  .ticket-row {
+    flex-direction: row;      /* залишаємо рядок, як є */
+    justify-content: space-between;
+    flex-wrap: wrap;          /* якщо не влазить, переносимо елементи */
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .ticket-name {
+    font-size: 16px;          /* трохи менший шрифт */
+    flex: 1 1 30%;            /* дозволяє займати частину рядка */
+  }
+
+  .ticket-controls {
+    flex: 1 1 65%;            /* контрол і ціна займають решту */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ticket-price {
+    font-size: 16px;
+  }
+
+  .ticket-quantity {
+    gap: 6px;
+  }
+
+  .ticket-quantity button {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cart-button {
+    position: relative; /* не absolute, щоб йшла під квитками */
+    width: 100%;
+    min-width: 0;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 18px;
+    padding: 14px 0;
+    right: 0;
+  }
+}

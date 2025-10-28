@@ -1,0 +1,148 @@
+.ticketinfo-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+}
+
+/* Фото концерту */
+.ticketinfo-image img {
+  width: 400px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Центральна інфа */
+.ticketinfo-details {
+  position: relative;
+  flex: 1;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1.5px dashed #ccc;
+}
+
+/* Назва співака — 10% зверху */
+.ticketinfo-top {
+  position: absolute;
+  top: 10%;
+  left: 0;
+}
+
+.ticketinfo-top h1 {
+  font-size: 24px;
+  margin: 0;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* Деталі концерту — 10% знизу */
+.ticketinfo-bottom {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.ticketinfo-bottom p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Права частина */
+.ticketinfo-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 160px;
+}
+
+.ticketinfo-price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #D31F37;
+}
+
+.ticketinfo-buy-btn {
+  padding: 12px 24px;
+  width: 100%;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #D31F37;
+  color: white;
+  border: none;
+  transition: 0.2s all;
+}
+
+.ticketinfo-buy-btn:hover {
+  background-color: #e04e52;
+}
+
+
+/* Мобільна адаптація для екранів <= 420px */
+
+@media (max-width: 420px) {
+  .ticketinfo-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .ticketinfo-image img {
+    width: 100%;      
+    max-width: none;  
+    border-radius: 8px;
+  }
+
+  .ticketinfo-details {
+    height: auto;
+    position: static;
+    border-right: none;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .ticketinfo-top {
+    position: static;
+    margin-top: 10px;
+  }
+
+  .ticketinfo-bottom {
+    position: static;
+    margin-top: 10px;
+    gap: 10px;
+    font-size: 16px;
+  }
+
+  .ticketinfo-action {
+    flex-direction: column; /* вертикальна колонка */
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .ticketinfo-price {
+    order: 1;       /* перше йде ціна */
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .ticketinfo-buy-btn {
+    order: 2;       /* кнопка під ціною */
+    width: 90%;     
+    font-size: 18px;
+    padding: 12px 0;
+  }
+}
+

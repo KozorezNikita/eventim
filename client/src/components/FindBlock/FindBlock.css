@@ -1,0 +1,95 @@
+/* === Hero section === */
+.hero {
+  position: relative;
+  height: 600px;
+  background: url("../../assets/findTicket.jpg") center/cover no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Search box === */
+.search-box {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  width: 90%;
+  max-width: 1200px;
+  align-items: center;
+}
+
+/* === Поля введення / селекти / дейтпікер === */
+.search-field {
+  flex: 1;
+  height: 42px;
+  padding: 0 12px;
+  background: #fff;
+  font-size: 14px;
+  color: #282828;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-field:hover {
+  border-color: #d31f37;
+  box-shadow: 0 0 0 2px rgba(211, 31, 55, 0.2);
+}
+
+/* === Custom DatePicker === */
+.date-wrapper {
+  position: relative;
+}
+
+/* === Кнопка пошуку === */
+.search-box button {
+  flex: 0 0 150px;
+  height: 42px;
+  background: #D31F37;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+
+
+/* === Мобільна адаптація === */
+@media (max-width: 768px) {
+  .search-box {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .search-field,
+  .search-box button {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .search-box {
+    flex-direction: column;
+    width: 95%;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .search-field,
+  .search-box button {
+    width: 100%;
+    flex: none;
+  }
+}

@@ -1,0 +1,148 @@
+/* --- Контейнер DatePicker --- */
+.datepicker-wrapper {
+  position: relative;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+/* --- Поле для дати --- */
+.datepicker-wrapper .custom-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* --- Ліва іконка календаря --- */
+.datepicker-wrapper .calendar-icon-left {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+  pointer-events: none;
+}
+
+/* --- Текст дати --- */
+.datepicker-wrapper .date-text {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #282828;
+}
+
+/* --- Стрілка відкриття календаря --- */
+.datepicker-wrapper .arrow-icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.datepicker-wrapper .arrow-icon.open {
+  transform: rotate(180deg);
+}
+
+/* --- Календар --- */
+.datepicker-wrapper .custom-calendar {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  background: #fff;
+  z-index: 10;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+
+/* --- Header календаря --- */
+.datepicker-wrapper .datepicker-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px; /* кнопка - місяць/рік - кнопка */
+  align-items: center;
+  justify-items: center;
+  height: 36px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+/* --- Кнопки навігації --- */
+.datepicker-wrapper .datepicker-header .nav-arrow {
+  width: 100%;
+  height: 24px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;      /* прибрали фон */
+  border: none;
+  color: #D31F37;        /* червоний колір стрілок */
+  cursor: pointer;
+  padding: 0;
+}
+
+/* --- Місяць і рік по центру --- */
+.datepicker-wrapper .datepicker-header .current-month {
+  text-align: center;
+  font-weight: 600;
+  color: #D31F37;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Дні тижня --- */
+.datepicker-wrapper .weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: #999;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+/* --- Дні місяця --- */
+.datepicker-wrapper .dates-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.datepicker-wrapper .date-cell {
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.datepicker-wrapper .date-cell:hover {
+  background-color: #f2f2f2;
+}
+
+.datepicker-wrapper .date-cell.selected {
+  background-color: #D31F37;
+  color: white;
+}
+
+/* --- Мобільна адаптивність --- */
+@media (max-width: 420px) {
+  .datepicker-wrapper .custom-input {
+    height: 40px;
+  }
+
+  .datepicker-wrapper .datepicker-header .nav-arrow {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+}

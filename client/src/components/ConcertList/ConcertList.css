@@ -1,0 +1,159 @@
+.popular-events {
+  padding: 40px;
+  font-family: "Inter", sans-serif;
+}
+
+.popular-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -1.5px;
+}
+
+.dot {
+  width: 18px;
+  height: 18px;
+  background: #D31F37;
+  display: inline-block;
+  margin-right: 18px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 🔹 ширина картки */
+  gap: 20px;
+  justify-content: center;
+  max-width: 1400px; /* 🔹 щоб вміщувалося не більше 4 карток */
+  margin: 0 auto;
+}
+
+.event-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 🔹 вирівнює контент */
+  height: 100%; /* 🔹 дозволяє займати всю висоту */
+}
+
+.event-image {
+  width: 100%;
+  height: 360px; /* або будь-яка висота контейнера */
+  overflow: hidden;
+  position: relative;
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* заповнює контейнер, обрізає зайве, не деформуючи */
+  display: block;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.25); /* ✅ напівпрозорий фон */
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  font-size: 30px;
+  color: gray;
+  transition: 
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
+  z-index: 2;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+  background: gray; /* трохи більше білого при наведенні */
+  color: #fff;
+}
+
+.favorite-btn.active {
+  color: #e50914; /* ❤️ червоне сердечко при активності */
+  background: rgba(255, 255, 255, 0.4); /* трошки яскравіше коло */
+}
+
+.event-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 🔹 кнопка внизу, решта зверху */
+  gap: 15px;
+  flex-grow: 1; /* 🔹 розтягує блок рівномірно */
+  
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 130%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+.event-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 🔹 максимум 2 рядки */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.event-info .date {
+  font-size: 14px; 
+}
+
+.event-info .price {
+  font-size: 14px; 
+}
+
+
+.event-info p svg {
+  margin-right: 8px; /* відступ між іконкою та текстом */
+  flex-shrink: 0;    /* щоб іконка не зменшувалася */
+}
+
+.buy-btn-concert {
+  font-size: 16px;
+  margin-top: 8px;
+  padding: 8px;
+  background: #D31F37;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+
+@media (max-width: 420px) {
+  .popular-events {
+    padding: 20px 15px;
+  }
+
+  .popular-title {
+  font-size: 28px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+}
+}
