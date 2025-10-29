@@ -1,6 +1,13 @@
-const pool = require("./db");
+// server/migrate.js
+const { Pool } = require("pg");
 
-// Дані концертів з локальної БД
+// Підключення до Heroku Postgres
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+// Дані концертів
 const concerts = [
     {
         "id": 1,
@@ -105,18 +112,13 @@ const concerts = [
 
 async function migrate() {
   try {
-    // Очищуємо таблицю concerts
-    await pool.query("DELETE FROM concerts");
-
-    // Вставляємо всі дані
     for (const concert of concerts) {
       await pool.query(
-        `INSERT INTO concerts (id, name, country, location, date, price, picture)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [concert.id, concert.name, concert.country, concert.location, concert.date, concert.price, concert.picture]
+        `INSERT INTO concerts (name, country, location, date, price, picture)
+         VALUES ($1, $2, $3, $4, $5, $6)`,
+        [concert.name, concert.country, concert.location, concert.date, concert.price, concert.picture]
       );
     }
-
     console.log(`✅ Successfully migrated ${concerts.length} concerts`);
   } catch (err) {
     console.error("❌ Migration failed:", err);
@@ -125,5 +127,4 @@ async function migrate() {
   }
 }
 
-// Запуск міграції
 migrate();
