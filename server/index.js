@@ -14,12 +14,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// API маршрути
+// --------- API маршрути ---------
 app.use("/api", countryRouter);
 app.use("/api", segmentRouter);
 app.use("/api", brandRouter);
 app.use("/api", productRouter);
 app.use("/api", concertRouter);
+// --------------------------------
 
 // --------- Віддача React фронтенду у продакшн ---------
 if (process.env.NODE_ENV === "production") {
@@ -32,7 +33,8 @@ if (process.env.NODE_ENV === "production") {
 }
 // ------------------------------------------------------
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server started on port ${PORT}`));
+
 
 
 /*const express = require("express")
