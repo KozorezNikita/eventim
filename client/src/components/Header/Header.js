@@ -75,7 +75,7 @@ export default function Header() {
         <Link to="/">Top Events</Link>
         <Link to="/about">About</Link>
         <Link to="/artists">Artists</Link>
-        <Link to="/managerDashboard">Manager Dashboard</Link>
+        
       </nav>
 
       <div className="header-right">

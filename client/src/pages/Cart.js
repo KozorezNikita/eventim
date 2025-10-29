@@ -14,13 +14,30 @@ export default function Cart() {
   };
 
   const handleCheckout = () => {
-    if (!agreed) {
-      alert("Please agree to the terms before proceeding.");
-      return;
+  if (!agreed) {
+    alert("Please agree to the terms before proceeding.");
+    return;
+  }
+
+  // Загальна кількість товарів у кошику
+  const totalItems = cartItems.reduce((sum, item) => sum + item.count, 0);
+
+    if (totalItems === 0) return;
+
+    if (totalItems === 1) {
+      // Редирект на gumroad одного товару
+      const firstItemGumroad = cartItems[0].gumroad;
+      if (firstItemGumroad) {
+        window.location.href = firstItemGumroad;
+      } else {
+        alert("Payment link not available.");
+      }
+    } else {
+      // 2 і більше товарів → на домашню сторінку
+      window.location.href = "/";
     }
-    // Тут логіка оплати
-    alert("Redirecting to payment...");
   };
+
 
   // Загальна сума
   const totalSum = cartItems.reduce((sum, item) => sum + Number(item.totalPrice), 0);

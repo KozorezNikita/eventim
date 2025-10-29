@@ -113,3 +113,65 @@
   color: white;
   cursor: pointer;
 }
+
+
+
+
+
+
+.password-protect {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.password-protect h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.password-protect input {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+  width: 250px;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.password-protect input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+.password-protect button {
+  padding: 12px 25px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ff6b6b;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.password-protect button:hover {
+  background-color: #ff4b4b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.password-protect button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

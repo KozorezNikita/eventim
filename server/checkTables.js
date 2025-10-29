@@ -1,26 +1,13 @@
-const { Pool } = require("pg");
+const pool = require("./db"); // шлях до db.js
 
-const isHeroku = process.env.DATABASE_URL ? true : false;
-
-const pool = new Pool(
-  isHeroku
-    ? {
-        connectionString: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false }, // для Heroku
-      }
-    : {
-        user: "postgres",
-        password: "lacazette10!",
-        host: "localhost",
-        port: 5432,
-        database: "concert",
-      }
-);
-
-async function checkConcerts() {
+async function checkTables() {
   try {
-    const res = await pool.query("SELECT * FROM concerts");
-    console.table(res.rows);
+    const res = await pool.query(`
+      SELECT table_name 
+      FROM information_schema.tables 
+      WHERE table_schema='public'
+    `);
+    console.log("Tables in DB:", res.rows.map(r => r.table_name));
   } catch (err) {
     console.error(err);
   } finally {
@@ -28,4 +15,4 @@ async function checkConcerts() {
   }
 }
 
-checkConcerts();
+checkTables();

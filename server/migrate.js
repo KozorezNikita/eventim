@@ -1,125 +1,328 @@
 // server/migrate.js
 const { Pool } = require("pg");
 
-// Підключення до Heroku Postgres
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: "postgres://ucj4d7v8jjabf1:p542d5005866e81572ef70673531563a9931f365622e91376f4d2b7f6d59c30b2@casrkuuedp6an1.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dd7hhoolvc7ccj?sslmode=require",
   ssl: { rejectUnauthorized: false },
 });
 
-// Дані концертів
+// Дані концертів з gumroad
 const concerts = [
-    {
-        "id": 1,
-        "name": "Linkin Park",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/28/2/linkin-park-band-logo-png_seeklogo-287898.png"
-    },
-    {
-        "id": 2,
-        "name": "Imagine Dragons",
-        "country": "Poland",
-        "location": "Narodovyi",
-        "date": "2026-10-12",
-        "price": "145",
-        "picture": "https://images.seeklogo.com/logo-png/51/2/imagine-dragons-logo-png_seeklogo-514972.png"
-    },
-    {
-        "id": 3,
-        "name": "Linkin Park",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/52/2/one-piece-wanted-poster-logo-png_seeklogo-520584.png"
-    },
-    {
-        "id": 4,
-        "name": "Linkin Park",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/5/2/flight-of-the-conchords-poster-logo-png_seeklogo-55820.png"
-    },
-    {
-        "id": 5,
-        "name": "Linkin Park",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/32/2/ronald-reagan-right-poster-logo-png_seeklogo-324539.png"
-    },
-    {
-        "id": 6,
-        "name": "Linkin Park",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/32/2/merry-christmas-poster-logo-png_seeklogo-322841.png"
-    },
-    {
-        "id": 7,
-        "name": "Artem Pivovarov",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/29/2/christmas-wish-poster-green-blue-elegant-logo-png_seeklogo-294090.png"
-    },
-    {
-        "id": 8,
-        "name": "Oscar Cortez",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/10/2/oscars-poster-2003-logo-png_seeklogo-104385.png"
-    },
-    {
-        "id": 9,
-        "name": "Alexandre Laca",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/29/2/vintage-maple-leaf-thanksgiving-poster-logo-png_seeklogo-293139.png"
-    },
-    {
-        "id": 10,
-        "name": "Nestor Arauj",
-        "country": "USA",
-        "location": "Madison Square Garden, New York",
-        "date": "2025-12-15",
-        "price": "120.5",
-        "picture": "https://images.seeklogo.com/logo-png/53/2/poster-indonesia-merdeka-logo-png_seeklogo-536609.png"
-    },
-    {
-        "id": 14,
-        "name": "Muse",
-        "country": "Poland",
-        "location": "Bernabeu",
-        "date": "2025-10-22",
-        "price": "50",
-        "picture": "https://images.seeklogo.com/logo-png/22/1/muse-knights-of-cydonia-logo-png_seeklogo-220525.png"
-    }
-]
+  // р4
+  {
+    id: 1,
+    name: "Apache 207",
+    country: "Frankfurt",
+    location: "Westfalenhalle",
+    date: "2025-11-30",
+    price: "49",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/apache207_Kat4Sitz?wanted=true"
+  },
+  {
+    id: 2,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-21",
+    price: "49",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/westfalenhalledortmund?wanted=true"
+  },
+  {
+    id: 3,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-22",
+    price: "49",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/apache207dortmund_Kat4Sitz?wanted=true"
+  },
+
+  // р3
+  {
+    id: 4,
+    name: "Lady Gaga",
+    country: "Berlin",
+    location: "Uber Arena",
+    date: "2025-11-04",
+    price: "39",
+    picture: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/lady_gaga_judas.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/uberarenaberlin?wanted=true"
+  },
+  {
+    id: 5,
+    name: "Lady Gaga",
+    country: "Berlin",
+    location: "Uber Arena",
+    date: "2025-11-05",
+    price: "39",
+    picture: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/lady_gaga_judas.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/uberarenaberlin05?wanted=true"
+  },
+  {
+    id: 6,
+    name: "OneRepublic (+ Ella Henderson)",
+    country: "Munich",
+    location: "Olympiahalle",
+    date: "2025-11-09",
+    price: "62",
+    picture: "https://armyinform.com.ua/wp-content/uploads/2022/04/onerepublic-5a712793eb97de0037466221.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/onerepubl?wanted=true"
+  },
+  {
+    id: 7,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-21",
+    price: "55",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/apache207eticket?wanted=true"
+  },
+  {
+    id: 8,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-22",
+    price: "55",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/apachearenatour?wanted=true"
+  },
+  {
+    id: 9,
+    name: "Apache 207",
+    country: "Frankfurt",
+    location: "Westfalenhalle",
+    date: "2025-11-30",
+    price: "55",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/apache207frankfurt?wanted=true"
+  },
+
+  // р2
+  {
+    id: 10,
+    name: "Lady Gaga",
+    country: "Berlin",
+    location: "Uber Arena",
+    date: "2025-11-04",
+    price: "84",
+    picture: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/lady_gaga_judas.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/uberarenaberlinladygaga?wanted=true"
+  },
+  {
+    id: 11,
+    name: "Lady Gaga",
+    country: "Berlin",
+    location: "Uber Arena",
+    date: "2025-11-05",
+    price: "84",
+    picture: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/lady_gaga_judas.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/ladygagauberarena?wanted=true"
+  },
+
+  // р1
+  {
+    id: 12,
+    name: "Lady Gaga",
+    country: "Berlin",
+    location: "Uber Arena",
+    date: "2025-11-04",
+    price: "126",
+    picture: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/lady_gaga_judas.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/ladygagauberarenaa?wanted=true"
+  },
+  {
+    id: 13,
+    name: "Lady Gaga",
+    country: "Berlin",
+    location: "Uber Arena",
+    date: "2025-11-05",
+    price: "126",
+    picture: "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/lady_gaga_judas.jpg",
+    gumroad: "https://etiticepowo.gumroad.com/l/uberarenaladygagae-ticket?wanted=true"
+  },
+  {
+    id: 14,
+    name: "OneRepublic (+ Ella Henderson)",
+    country: "Munich",
+    location: "Olympiahalle",
+    date: "2025-11-09",
+    price: "70",
+    picture: "https://armyinform.com.ua/wp-content/uploads/2022/04/onerepublic-5a712793eb97de0037466221.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/onerepublicmunich?wanted=true"
+  },
+  {
+    id: 15,
+    name: "Apache 207",
+    country: "Frankfurt",
+    location: "Westfalenhalle",
+    date: "2025-11-30",
+    price: "67",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/apache207arenatour?wanted=true"
+  },
+  {
+    id: 16,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-21",
+    price: "67",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/apache207_dortmund?wanted=true"
+  },
+  {
+    id: 17,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-22",
+    price: "67",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/dortmund_apache207?wanted=true"
+  },
+
+  // Стоячие
+  {
+    id: 18,
+    name: "OneRepublic (+ Ella Henderson)",
+    country: "Munich",
+    location: "Olympiahalle",
+    date: "2025-11-09",
+    price: "66",
+    picture: "https://armyinform.com.ua/wp-content/uploads/2022/04/onerepublic-5a712793eb97de0037466221.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/Olympiahalle_OneRepublic?wanted=true"
+  },
+  {
+    id: 19,
+    name: "Apache 207",
+    country: "Frankfurt",
+    location: "Westfalenhalle",
+    date: "2025-11-30",
+    price: "60",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/Apache207Stehplatz?wanted=true"
+  },
+  {
+    id: 20,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-21",
+    price: "60",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://motewewale.gumroad.com/l/Apache207StehplatzDortmund?wanted=true"
+  },
+  {
+    id: 21,
+    name: "Apache 207",
+    country: "Dortmund",
+    location: "Westfalenhalle",
+    date: "2025-11-22",
+    price: "60",
+    picture: "https://laut.de/Apache-207/apache-207-205339.jpg",
+    gumroad: "https://odaduqu.gumroad.com/l/StehplatzDortmundApache207?wanted=true"
+  },
+
+  // Одиночные
+  {
+    id: 22,
+    name: "SDP",
+    country: "Munich",
+    location: "Olympiahalle",
+    date: "2025-11-07",
+    price: "53",
+    picture: "https://2wjyoqczplq2loncx0jfrnk1q5w-thumbnail.storage.muc1.de.bnerd.com/thumbnail/de/Veranstaltungen/2025/SDP/8299/image-thumb__8299__thumbnail-event-teaser-1/SDP_pressebild_web_byRobertHirschmann%26bdxmedia.2d187496.webp",
+    gumroad: "https://odaduqu.gumroad.com/l/SDP_Olympiahalle?wanted=true"
+  },
+  {
+    id: 23,
+    name: "SDP",
+    country: "Munich",
+    location: "Olympiahalle",
+    date: "2025-11-08",
+    price: "53",
+    picture: "https://2wjyoqczplq2loncx0jfrnk1q5w-thumbnail.storage.muc1.de.bnerd.com/thumbnail/de/Veranstaltungen/2025/SDP/8299/image-thumb__8299__thumbnail-event-teaser-1/SDP_pressebild_web_byRobertHirschmann%26bdxmedia.2d187496.webp",
+    gumroad: "https://odaduqu.gumroad.com/l/Munich_Olympiahalle_SDP?wanted=true"
+  },
+  {
+    id: 24,
+    name: "The Witcher in Concert",
+    country: "Munich",
+    location: "Olympiapark",
+    date: "2025-11-12",
+    price: "35",
+    picture: "https://thumbor.factoryinternational.org/DZNK4KBMZI8YWqiYTVoeZktzhWs=/adaptive-fit-in/800x1200/filters:format(webp):quality(60)/https://publicydn4hdgozyjrg.blob.core.windows.net/public/dd/images/TheWitcherInConcert_1x1.a7ea428.jpg",
+    gumroad: "https://odaduqu.gumroad.com/l/TheWitcherinConcert_Olympiapark?wanted=true"
+  },
+  {
+    id: 25,
+    name: "Tom Odell",
+    country: "Munich",
+    location: "Olympiahalle",
+    date: "2025-11-14",
+    price: "55",
+    picture: "https://content.api.news/v3/images/bin/52e60239bcd0a08e1977f8b2d3c0ea35",
+    gumroad: "https://odaduqu.gumroad.com/l/TomOdell_Munich_Olympiahalle?wanted=true"
+  },
+  {
+    id: 26,
+    name: "Vivaldi “Four Seasons”",
+    country: "Berlin",
+    location: "Französischer Dom",
+    date: "2025-11-02",
+    price: "31",
+    picture: "https://faktypro.com.ua/uploads/img-2/15-cikavih-faktiv-pro-vivaldi.jpg",
+    gumroad: "https://odaduqu.gumroad.com/l/Vivaldi_Berlin_FranzosischerDom?wanted=true"
+  },
+  {
+    id: 27,
+    name: "Vivaldi “Four Seasons”",
+    country: "Berlin",
+    location: "Französischer Dom",
+    date: "2025-11-16",
+    price: "31",
+    picture: "https://faktypro.com.ua/uploads/img-2/15-cikavih-faktiv-pro-vivaldi.jpg",
+    gumroad: "https://odaduqu.gumroad.com/l/FranzosischerDom_Vivaldi?wanted=true"
+  }
+];
+
 
 async function migrate() {
   try {
+    // 1. Додаємо колонку gumroad, якщо її немає
+    const colCheck = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name='concerts' AND column_name='gumroad';
+    `);
+
+    if (colCheck.rows.length === 0) {
+      console.log("Adding column 'gumroad'...");
+      await pool.query(`
+        ALTER TABLE concerts 
+        ADD COLUMN gumroad TEXT NOT NULL DEFAULT 'https://motewewale.gumroad.com/l/apache207_dortmund?wanted=true';
+      `);
+    }
+
+    // 2. Очищаємо старі записи (за бажанням)
+    console.log("Clearing old data...");
+    await pool.query("DELETE FROM concerts;");
+
+    // 3. Вставляємо всі концерти з gumroad
     for (const concert of concerts) {
       await pool.query(
-        `INSERT INTO concerts (name, country, location, date, price, picture)
-         VALUES ($1, $2, $3, $4, $5, $6)`,
-        [concert.name, concert.country, concert.location, concert.date, concert.price, concert.picture]
+        `INSERT INTO concerts (name, country, location, date, price, picture, gumroad)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        [concert.name, concert.country, concert.location, concert.date, concert.price, concert.picture, concert.gumroad]
       );
     }
-    console.log(`✅ Successfully migrated ${concerts.length} concerts`);
+
+    console.log(`✅ Successfully migrated ${concerts.length} concerts with gumroad`);
   } catch (err) {
     console.error("❌ Migration failed:", err);
   } finally {

@@ -7,10 +7,14 @@ export default function TicketDesc({ concert }) {
   const navigate = useNavigate();
   const { addToCart, clearCart } = useCart();
   const [tickets, setTickets] = useState([
+    { name: "P1", count: 0, priceFactor: 1 },
+  ]);
+
+  /*const [tickets, setTickets] = useState([
     { name: "P3", count: 0, priceFactor: 3.2 },
     { name: "P2", count: 0, priceFactor: 2.3 },
     { name: "P1", count: 0, priceFactor: 1 },
-  ]);
+  ]);*/
 
   const increment = (index) => {
     const newTickets = [...tickets];
@@ -40,6 +44,7 @@ export default function TicketDesc({ concert }) {
       concertDate: concert.date,
       type: t.name,
       count: t.count,
+      gumroad: concert.gumroad,
       price: (concert.price / t.priceFactor).toFixed(2),
       totalPrice: (t.count * (concert.price / t.priceFactor)).toFixed(2),
     }));

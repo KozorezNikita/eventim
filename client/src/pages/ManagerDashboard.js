@@ -9,8 +9,13 @@ export default function ManagerDashboard() {
     location: "",
     date: "",
     price: "",
-    picture: ""
-  });
+    picture: "",
+    gumroad: "" // нове поле
+});
+
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const PASSWORD = "gumroadpass";
 
   const [concerts, setConcerts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -85,6 +90,33 @@ export default function ManagerDashboard() {
     }
   };
 
+    if (!authenticated) {
+      return (
+        <div className="password-protect">
+          <h2>Enter password to access Manager Dashboard</h2>
+          <input
+            type="text"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            placeholder="Password"
+          />
+          <button
+            onClick={() => {
+              if (passwordInput === PASSWORD) {
+                setAuthenticated(true);
+              } else {
+                alert("Incorrect password");
+              }
+            }}
+          >
+            Enter
+          </button>
+        </div>
+      );
+    }
+
+  
+
   return (
     <div className="manager-dashboard">
       <h2>MANAGER’S DASHBOARD</h2>
@@ -136,6 +168,12 @@ export default function ManagerDashboard() {
             value={artistData.price}
             onChange={(e) => handleChange("price", e.target.value)}
           />
+          <input
+            type="text"
+            placeholder="Gumroad URL"
+            value={artistData.gumroad}
+            onChange={(e) => handleChange("gumroad", e.target.value)}
+          />
         </div>
 
         {/* Кнопка збереження */}
@@ -156,6 +194,7 @@ export default function ManagerDashboard() {
               <p><strong>{concert.name}</strong></p>
               <p>{concert.location}, {concert.country}</p>
               <p>{concert.date} — €{concert.price}</p>
+              <p>{concert.gumroad}</p>
             </div>
             <button className="delete-btn" onClick={() => handleDelete(concert.id)}>Delete</button>
           </div>
