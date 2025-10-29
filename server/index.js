@@ -22,18 +22,19 @@ app.use("/api", productRouter);
 app.use("/api", concertRouter);
 // --------------------------------
 
+
 // --------- Віддача React фронтенду у продакшн ---------
 if (process.env.NODE_ENV === "production") {
   const clientBuildPath = path.join(__dirname, "../client/build");
   app.use(express.static(clientBuildPath));
 
-  app.get("/*", (req, res) => {
+  app.use((req, res) => {
     res.sendFile(path.join(clientBuildPath, "index.html"));
   });
 }
 // ------------------------------------------------------
 
-app.listen(PORT, () => console.log(`✅ Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 
 
