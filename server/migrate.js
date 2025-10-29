@@ -1,40 +1,6 @@
-const { Pool } = require("pg");
+const pool = require("./db");
 
-let pool;
-
-if (process.env.DATABASE_URL) {
-  // Heroku Postgres
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false },
-  });
-} else {
-  // Локальна база
-  pool = new Pool({
-    user: "postgres",
-    password: "lacazette10!",
-    host: "localhost",
-    port: 5432,
-    database: "concert",
-  });
-}
-
-module.exports = pool;
-
-
-
-
-/*
-// migrate.js
-const { Pool } = require("pg");
-
-// підключення до Heroku Postgres
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Heroku дає цей URL
-  ssl: { rejectUnauthorized: false }, // обов'язково для Heroku
-});
-
-// дані концертів з локальної бази
+// Дані концертів з локальної БД
 const concerts = [
     {
         "id": 1,
@@ -139,26 +105,19 @@ const concerts = [
 
 async function migrate() {
   try {
-    // очищаємо таблицю (якщо потрібно)
+    // Очищуємо таблицю concerts
     await pool.query("DELETE FROM concerts");
 
+    // Вставляємо всі дані
     for (const concert of concerts) {
       await pool.query(
         `INSERT INTO concerts (id, name, country, location, date, price, picture)
          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [
-          concert.id,
-          concert.name,
-          concert.country,
-          concert.location,
-          concert.date,
-          concert.price,
-          concert.picture,
-        ]
+        [concert.id, concert.name, concert.country, concert.location, concert.date, concert.price, concert.picture]
       );
     }
 
-    console.log(`✅ Successfully migrated ${concerts.length} concerts to Heroku DB`);
+    console.log(`✅ Successfully migrated ${concerts.length} concerts`);
   } catch (err) {
     console.error("❌ Migration failed:", err);
   } finally {
@@ -166,99 +125,5 @@ async function migrate() {
   }
 }
 
-// запускаємо міграцію
+// Запуск міграції
 migrate();
-
-*/
-
-
-
-/*const { Pool } = require("pg");
-
-// Локальна база
-const localPool = new Pool({
-  user: "postgres",
-  password: "lacazette10!",
-  host: "localhost",
-  port: 5432,
-  database: "concert",
-});
-
-// Heroku база
-const herokuPool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
-
-async function migrateTable(tableName) {
-  const clientLocal = await localPool.connect();
-  const clientHeroku = await herokuPool.connect();
-
-  try {
-    const res = await clientLocal.query(`SELECT * FROM ${tableName}`);
-    const rows = res.rows;
-
-    for (let row of rows) {
-      const keys = Object.keys(row);
-      const values = Object.values(row);
-      const placeholders = keys.map((_, i) => `$${i + 1}`).join(", ");
-
-      const query = `INSERT INTO ${tableName}(${keys.join(
-        ", "
-      )}) VALUES(${placeholders})`;
-      await clientHeroku.query(query, values);
-    }
-
-    console.log(`✅ Table "${tableName}" migrated (${rows.length} rows)`);
-  } catch (err) {
-    console.error(`❌ Error migrating "${tableName}":`, err);
-  } finally {
-    clientLocal.release();
-    clientHeroku.release();
-  }
-}
-
-async function migrate() {
-  const tables = ["users", "events", "tickets"]; // заміни на свої таблиці
-  for (let table of tables) {
-    await migrateTable(table);
-  }
-
-  await localPool.end();
-  await herokuPool.end();
-}
-
-migrate();
-*/
-
-
-
-/*
-const { Pool } = require("pg");
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // береться з Heroku
-  ssl: {
-    rejectUnauthorized: false // обов'язково для Heroku Postgres
-  }
-});
-
-module.exports = pool;
-
-*/
-
-
-
-/*
-const Pool = require("pg").Pool
-const pool = new Pool({
-    user: "postgres",
-    password: "lacazette10!",
-    host: "localhost",
-    port: 5432,
-    database: "concert"
-})
-
-module.exports = pool
-
-*/
