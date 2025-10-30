@@ -113,7 +113,7 @@ export default function PrivacyPolicy() {
           kontaktieren Sie uns bitte unter: <a href="mailto:eventim@gmail.com">eventim@gmail.com</a>
         </p>
         <p>
-          Eventin Sp. z o.o., ul. Marszałkowska 7, 00-626 Warsaw, Poland
+          Eventim Sp. z o.o., Berlin, Friedrichstraße 7
         </p>
       </div>
     </section>
