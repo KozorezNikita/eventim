@@ -8,6 +8,9 @@ export default function TicketDesc({ concert, ticketsRef }) {
   const { addToCart, clearCart } = useCart();
   const [tickets, setTickets] = useState([{ name: "P1", count: 0, priceFactor: 1 }]);
 
+  // ⛔ Перевірка перед будь-яким доступом до concert.date
+  if (!concert) return null;
+
   // Якщо concert існує — тоді вже можемо працювати з датою
   const concertDate = concert?.date ? new Date(concert.date) : null;
 
