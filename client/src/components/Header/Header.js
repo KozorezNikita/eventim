@@ -35,7 +35,7 @@ export default function Header() {
         </Link>
         
 
-        <div className="city-wrapper" ref={dropdownRef}>
+        {/*<div className="city-wrapper" ref={dropdownRef}>
           <div className="city" onClick={() => setCityOpen(!cityOpen)}>
             <svg
               className="location-icon"
@@ -68,17 +68,17 @@ export default function Header() {
               ))}
             </ul>
           )}
-        </div>
+        </div>*/}
       </div>
 
-      <nav className={`nav ${menuOpen ? "open" : ""}`}>
+      {/*<nav className={`nav ${menuOpen ? "open" : ""}`}>
         <Link to="/">Top Events</Link>
         <Link to="/about">About</Link>
         <Link to="/artists">Artists</Link>
         
-      </nav>
+      </nav>*/}
 
-      <div className="header-right">
+      {/*<div className="header-right">
         <div className="search-wrapper">
           <input type="text" placeholder="Search" className="search" />
           <svg
@@ -108,7 +108,7 @@ export default function Header() {
           <span></span>
           <span></span>
         </div>
-      </div>
+      </div>*/}
     </header>
   );
 }

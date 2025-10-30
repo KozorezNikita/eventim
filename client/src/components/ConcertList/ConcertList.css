@@ -28,10 +28,10 @@
 
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 🔹 ширина картки */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   justify-content: center;
-  max-width: 1400px; /* 🔹 щоб вміщувалося не більше 4 карток */
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -42,13 +42,13 @@
   background: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 🔹 вирівнює контент */
-  height: 100%; /* 🔹 дозволяє займати всю висоту */
+  justify-content: space-between;
+  height: 100%;
 }
 
 .event-image {
   width: 100%;
-  height: 360px; /* або будь-яка висота контейнера */
+  height: 360px;
   overflow: hidden;
   position: relative;
 }
@@ -56,7 +56,7 @@
 .event-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* заповнює контейнер, обрізає зайве, не деформуючи */
+  object-fit: cover;
   display: block;
 }
 
@@ -64,46 +64,41 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  background: rgba(255, 255, 255, 0.25); /* ✅ напівпрозорий фон */
+  background: rgba(255, 255, 255, 0.25);
   border: none;
   padding: 3px;
   cursor: pointer;
   font-size: 30px;
   color: gray;
-  transition: 
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.2s ease;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
   z-index: 2;
 }
 
 .favorite-btn:hover {
   transform: scale(1.1);
-  background: gray; /* трохи більше білого при наведенні */
+  background: gray;
   color: #fff;
 }
 
 .favorite-btn.active {
-  color: #e50914; /* ❤️ червоне сердечко при активності */
-  background: rgba(255, 255, 255, 0.4); /* трошки яскравіше коло */
+  color: #e50914;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .event-info {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 🔹 кнопка внизу, решта зверху */
-  gap: 15px;
-  flex-grow: 1; /* 🔹 розтягує блок рівномірно */
-  
+  justify-content: space-between;
+  gap: 10px;
+  flex-grow: 1;
+  color: #282828;
   font-family: Inter;
   font-weight: 400;
   font-style: Regular;
   font-size: 16px;
-  leading-trim: NONE;
   line-height: 130%;
   letter-spacing: 0%;
-  vertical-align: middle;
 }
 
 .event-info h3 {
@@ -112,24 +107,30 @@
   margin-bottom: 8px;
   line-height: 1.3;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 🔹 максимум 2 рядки */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-transform: uppercase;
 }
 
-.event-info .date {
-  font-size: 14px; 
+/* 🔹 Менший проміжок між country та location */
+.event-info p:nth-child(2),
+.event-info p:nth-child(3) {
+  margin-bottom: 2px;
 }
 
-.event-info .price {
-  font-size: 14px; 
+.event-info .event-date {
+  font-size: 16px;
 }
 
+.event-info .event-price {
+  font-size: 16px;
+  color: #282828;
+}
 
 .event-info p svg {
-  margin-right: 8px; /* відступ між іконкою та текстом */
-  flex-shrink: 0;    /* щоб іконка не зменшувалася */
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 
 .buy-btn-concert {
@@ -140,8 +141,13 @@
   color: white;
   border: none;
   cursor: pointer;
+  height: 40px;
+  transition: background 0.3s ease;
 }
 
+.buy-btn-concert:hover {
+  background: #b81b2f;
+}
 
 @media (max-width: 420px) {
   .popular-events {
@@ -149,11 +155,11 @@
   }
 
   .popular-title {
-  font-size: 28px;
-}
+    font-size: 28px;
+  }
 
-.dot {
-  width: 14px;
-  height: 14px;
-}
+  .dot {
+    width: 14px;
+    height: 14px;
+  }
 }

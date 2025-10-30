@@ -4,7 +4,6 @@
   background-color: #f9f9f9;
 }
 
-/* Заголовок MOST POPULAR */
 .cart-popular-title {
   font-size: 36px;
   font-weight: bold;
@@ -21,14 +20,12 @@
   margin-right: 12px;
 }
 
-/* Контейнер для контактів і кошика */
 .cart-content {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
 }
 
-/* Ліва колонка */
 .cart-contact-info {
   flex: 1;
   min-width: 250px;
@@ -54,7 +51,7 @@
   font-size: 16px;
 }
 
-/* Права колонка */
+
 .cart-items {
   flex: 1;
   min-width: 250px;
@@ -62,34 +59,39 @@
   padding: 20px;
 }
 
+.cart-item-details h4,
+.cart-item-details p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 .cart-empty-text {
   font-size: 18px;
 }
 
-/* Header кошика */
 .cart-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.cart-clear-btn {
+/* Десктопна кнопка */
+.desktop-only {
+  position: absolute;
+  top: 0;
+  right: 0;
   background: none;
   border: none;
   color: #D31F37;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.2s;
   padding: 0;
-  margin: 0;
-  line-height: 1;
-  vertical-align: middle;
-  display: flex;
-  align-items: center;
 }
-.cart-clear-btn:hover {
+
+.desktop-only:hover {
   color: #e04e52;
 }
 
@@ -110,9 +112,9 @@
   gap: 20px;
   padding: 16px 0;
   border-bottom: 1px solid #ccc;
+  position: relative; /* для моб кнопки */
 }
 
-/* Фото концерту */
 .cart-item-image {
   width: 120px;
   height: 120px;
@@ -120,7 +122,6 @@
   border-radius: 8px;
 }
 
-/* Інформаційна частина */
 .cart-item-details {
   flex: 1;
   display: flex;
@@ -134,7 +135,6 @@
   margin-bottom: 8px;
 }
 
-/* Рядки дата/країна/локація з іконками */
 .cart-item-line {
   display: flex;
   align-items: center;
@@ -149,13 +149,11 @@
   font-size: 18px;
 }
 
-/* Тип та кількість квитків */
 .cart-item-type-count {
   margin-top: 8px;
   font-size: 15px;
 }
 
-/* Контейнер для ціни */
 .cart-item-price-container {
   display: flex;
   align-items: center;
@@ -167,9 +165,19 @@
   color: #D31F37;
 }
 
+/* Мобільна кнопка */
+.mobile-only {
+  display: none;
+  color: #D31F37;
+  font-size: 14px;
+}
+.mobile-only {
+  display: none;
+  color: #D31F37;
+  font-size: 14px;
+}
 
-
-
+/* Сума та кнопки */
 .cart-summary {
   margin-top: 20px;
   display: flex;
@@ -223,8 +231,7 @@
   background-color: #e04e52;
 }
 
-/* Адаптив для мобільних */
-/* Адаптив для мобільних */
+/* Адаптив */
 @media (max-width: 420px) {
   .cart-content {
     flex-direction: column;
@@ -234,18 +241,14 @@
   .cart-contact-info,
   .cart-items {
     flex: 1 1 100%;
-    min-width: auto;
     padding: 0 10px;
   }
 
   .cart-contact-form {
-    flex-direction: column;
     gap: 8px;
   }
 
   .cart-input {
-    width: 100%;
-    box-sizing: border-box;
     padding: 6px 8px;
     font-size: 13px;
   }
@@ -277,24 +280,6 @@
     font-size: 15px;
   }
 
-  .cart-summary {
-    gap: 10px;
-    padding: 0 10px;
-  }
-
-  .cart-total {
-    font-size: 15px;
-  }
-
-  .cart-agree {
-    font-size: 12px;
-  }
-
-  .cart-pay-btn {
-    font-size: 13px;
-    padding: 8px 14px;
-  }
-
   .cart-popular-title {
     font-size: 24px;
   }
@@ -303,7 +288,44 @@
     font-size: 18px;
   }
 
-  .cart-clear-btn {
-    font-size: 14px;
+  /* Десктопна кнопка ховається */
+  .desktop-only {
+    display: none;
   }
+
+  /* Мобільна кнопка з іконкою 🗑 */
+  .mobile-only {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 18px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #D31F37;
+  }
+
+  
+
+
+  .mobile-only:hover {
+    color: #e04e52;
+  }
+
+  .cart-item-price-container {
+    padding-right: 40px; /* щоб кнопка не перекривала ціну */
+  }
+
+  .cart-note {
+  font-size: 14px;
+}
+
+.cart-header {
+  margin-bottom: -20px;
+  
+  margin-top: 10px;
+}
+
 }

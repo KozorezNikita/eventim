@@ -1,0 +1,62 @@
+/* PrivacyPolicy.css */
+.privacy-policy {
+  padding: 40px;
+  font-family: "Inter", sans-serif;
+  background-color: #f9f9f9;
+  line-height: 1.6; /* основний міжрядковий інтервал для всього блоку */
+}
+
+.privacy-policy h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.privacy-policy .popular-title {
+  margin-bottom: 40px;
+}
+
+.privacy-policy .dot {
+  width: 18px;
+  height: 18px;
+  background: #D31F37;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.policy-section {
+  margin-bottom: 2rem;
+}
+
+.policy-section h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.policy-section p,
+.policy-section ul,
+.policy-section li {
+  font-size: 18px;
+  color: black;
+  line-height: 1.6; /* рівний міжрядковий інтервал для всього тексту */
+}
+
+.policy-section ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
+
+/* Зміна кольору маркерів списку */
+.policy-section ul li::marker {
+  color: #D31F37;
+}
+
+.policy-section a {
+  color: #c00;
+  text-decoration: none;
+}
+
+.policy-section a:hover {
+  text-decoration: underline;
+}

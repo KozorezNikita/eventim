@@ -2,8 +2,18 @@ import { useState, useRef, useEffect } from "react";
 import "./CustomDatePicker.css";
 
 const months = [
-  "Січень","Лютий","Березень","Квітень","Травень","Червень",
-  "Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"
+  "Januar",
+  "Februar",
+  "März",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Dezember"
 ];
 
 export default function CustomDatePicker() {

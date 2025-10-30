@@ -4,32 +4,45 @@
   font-family: "Inter", sans-serif;
 }
 
-/* Верхній блок (заголовок селекту) */
 .select-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   background: #fff;
   padding: 0 12px;
   height: 40px;
   cursor: pointer;
-  transition: border-color 0.2s;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.select-header:hover {
-  border-color: #D31F37;
+
+.select-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  flex-shrink: 0;
 }
 
-/* Іконка стрілки */
+.select-text {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .arrow {
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .arrow.open {
   transform: rotate(180deg);
 }
 
-/* Список опцій */
 .select-options {
   position: absolute;
   top: calc(100% + 4px);
@@ -43,27 +56,19 @@
   animation: fadeIn 0.15s ease;
 }
 
-/* Окремий елемент списку */
 .option {
   padding: 8px 12px;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
 
-/* 🔥 Hover ефект */
-.option:hover {
-  background: #D31F37;
-  color: #fff;
-}
-
-/* Вибрана опція */
+.option:hover,
 .option.selected {
-  background: #D31F37;
+  background: #d31f37;
   color: #fff;
   font-weight: 600;
 }
 
-/* Анімація */
 @keyframes fadeIn {
   from {
     opacity: 0;

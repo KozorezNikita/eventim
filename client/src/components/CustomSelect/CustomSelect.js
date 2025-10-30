@@ -1,7 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import "./CustomSelect.css";
 
-export default function CustomSelect({ options, placeholder = "Select option" }) {
+export default function CustomSelect({
+  options,
+  placeholder = "Select option",
+  icon = null, // 🎵 SVG або будь-який React-елемент
+}) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const wrapperRef = useRef();
@@ -13,7 +17,6 @@ export default function CustomSelect({ options, placeholder = "Select option" })
     setOpen(false);
   };
 
-  // Закриття при кліку поза селектом
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
@@ -27,7 +30,11 @@ export default function CustomSelect({ options, placeholder = "Select option" })
   return (
     <div className="custom-select" ref={wrapperRef}>
       <div className="select-header search-field" onClick={toggleOpen}>
-        <span>{selected || placeholder}</span>
+        {/* 🎵 SVG, який прокидається через проп */}
+        {icon && <span className="select-icon">{icon}</span>}
+
+        <span className="select-text">{selected || placeholder}</span>
+
         <svg
           className={`arrow ${open ? "open" : ""}`}
           width="18"

@@ -85,7 +85,13 @@
   border: 1px solid #ccc;
   background: #fff;
   cursor: pointer;
-  border-radius: 4px;
+  border: 1px solid gray;
+  font-size: 20px;
+}
+
+.ticket-quantity span {
+  color: #D31F37;
+  font-size: 20px;
 }
 
 .cart-button {
@@ -95,8 +101,7 @@
   font-size: 18px;           /* шрифт 18px */
   border: none;              /* без рамки */
   padding: 12px 24px;        /* внутрішні відступи */
-  cursor: pointer;           /* курсор у вигляді руки */
-  border-radius: 6px;        /* закруглені кути */         
+  cursor: pointer;           /* курсор у вигляді руки */               
   transition: 0.2s all; 
   right: 10%;  
   margin-top: 20px;

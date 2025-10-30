@@ -134,6 +134,41 @@
   font-size: 0.95rem;
 }
 
+.concert-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edit-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-btn:hover {
+  background: #0056b3;
+}
+
+.cancel-btn {
+  background: #ccc;
+  color: #000;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background: #aaa;
+}
+
+
 /* Медіа-запит для екранів до 420px */
 @media (max-width: 420px) {
   .concert-item {

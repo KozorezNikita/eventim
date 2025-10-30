@@ -29,7 +29,7 @@ export default function TicketInfo({ concert }) {
         <div className="ticketinfo-action">
           <p className="ticketinfo-price">
             <FaCoins style={{ marginRight: "6px", verticalAlign: "middle" }} />
-            {concert.price}
+            €{concert.price}
           </p>
           <button className="ticketinfo-buy-btn">Tickets anzeigen</button>
         </div>

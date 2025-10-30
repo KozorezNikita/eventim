@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PopularSlider.css";
 import { FiCalendar, FiDollarSign } from "react-icons/fi";
+import { FaCoins } from "react-icons/fa";
 
 function PopularSlider({ slides }) {
   const [current, setCurrent] = useState(0);
@@ -43,7 +44,7 @@ function PopularSlider({ slides }) {
   return (
     <section className="popular">
       <h2 className="popular-title">
-        <span className="dot"></span> MOST POPULAR
+        <span className="dot"></span> AM BELIEBTESTEN
       </h2>
 
       <div className="slider">
@@ -56,20 +57,17 @@ function PopularSlider({ slides }) {
               <div className="popular-info">
                 <div className="info-top">
                   <h3>{slide.name}</h3>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: slide.location.replace(/\n/g, "<br/>"),
-                    }}
-                  />
+                  <p>{slide.country}</p>
+                  <p> {slide.location}</p>
                 </div>
 
                 <div className="info-bottom">
                   <div className="details">
                     <p className="date"><FiCalendar /> {slide.date}</p>
-                    <p className="price"><FiDollarSign /> {slide.price}</p>
+                    <p className="price"><FaCoins />  €{slide.price}</p>
                   </div>
                   <button className="buy-btn" onClick={() => handleBuy(slide)}>
-                    Buy tickets
+                    Tickets kaufen
                   </button>
                 </div>
               </div>

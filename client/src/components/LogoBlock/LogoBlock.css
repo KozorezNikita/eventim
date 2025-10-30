@@ -1,57 +1,77 @@
 .logo-block {
-  display: flex;               
-  align-items: center;         
-  justify-content: space-between; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: nowrap;
   padding: 40px;
 
-  overflow-x: auto;            /* горизонтальний скрол */
-  -webkit-overflow-scrolling: touch; /* плавний скрол на iOS */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 
-  /* приховати скролбар */
-  scrollbar-width: none;       /* Firefox */
+  /* 🔹 Напівпрозорість блоку */
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+
+  /* 🔹 Приховати скролбар */
+  scrollbar-width: none;
 }
 
 .logo-block::-webkit-scrollbar {
-  display: none;               /* Chrome, Safari, Edge */
+  display: none;
 }
 
 .logo-item {
+  width: 120px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.5); /* світла рамка */
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0 0 auto; /* не стискати логотипи у скролі */
   margin-right: 20px;
-}
-
-.logo-block .logo-item:first-child img {
-  transform: translateY(-20px);
+  flex: 0 0 auto;
 }
 
 .logo-item img {
-  height: 50px;
-  width: auto;
-  display: block;
+  max-width: 90%;
+  max-height: 80%;
+  object-fit: contain;
   transition: transform 0.2s ease;
+  opacity: 0.9;
 }
 
-.logo-item img:hover {
-  transform: scale(1.1);
+
+/* 🔹 Перший логотип трохи піднятий */
+.logo-block .logo-item:first-child img {
+  transform: translateY(-10px);
 }
 
-/* Адаптивність */
+.logo-item:nth-child(1) img,
+.logo-item:nth-child(4) img {
+  transform: scale(0.5);
+}
+
+.logo-item:nth-child(3) img {
+  transform: scale(4);
+}
+
+
+.logo-item:nth-child(5) img,
+.logo-item:nth-child(6) img {
+  transform: scale(2);
+}
+
+
+/* 🔹 Адаптивність */
 @media (max-width: 768px) {
   .logo-block {
-    justify-content: flex-start; 
+    justify-content: flex-start;
     padding: 20px 10px;
   }
 
-  .logo-block .logo-item:first-child img {
-  transform: translateY(-15px);
-}
-
   .logo-item img {
+    width: 80px;
     height: 40px;
   }
 }
@@ -62,6 +82,7 @@
   }
 
   .logo-item img {
+    width: 60px;
     height: 30px;
   }
 }

@@ -33,8 +33,8 @@ export default function MainPage() {
 
   return (
     <div className="page">
-      <FindBlock />
-      <PopularSlider slides={concerts} />
+      <FindBlock concerts={concerts} />
+      <PopularSlider slides={concerts.slice(0, 5)} />
       <ConcertList eventsData={concerts} />
       {/*<LogoBlock />*/}
       {/*} <InfoBlock />*/}

@@ -168,7 +168,7 @@ export default function ConcertList({ eventsData }) {
   return (
     <section className="popular-events">
       <h2 className="popular-title">
-        <span className="dot"></span> ALL EVENTS
+        <span className="dot"></span> ALLE EVENTS
       </h2>
       <div className="events-grid">
         {eventsData.map((event, index) => (
@@ -186,20 +186,20 @@ export default function ConcertList({ eventsData }) {
             </div>
             <div className="event-info">
               <h3>{event.name}</h3>
+              <p>{event.country}</p>
               <p>{event.location}</p>
-              <p>{event.venue}</p>
               <p className="event-date">
                 <FiCalendar /> {event.date}
               </p>
               <p className="event-price">
-                <FaCoins color="gray" style={{ marginRight: "6px", verticalAlign: "middle" }} />
-                {event.price}
+                <FaCoins  />
+                €{event.price}
               </p>
               <button
                 className="buy-btn-concert"
                 onClick={() => handleBuy(event.id)}
               >
-                Buy tickets
+                Tickets kaufen
               </button>
             </div>
           </div>

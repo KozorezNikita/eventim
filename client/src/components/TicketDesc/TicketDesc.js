@@ -66,31 +66,43 @@ export default function TicketDesc({ concert }) {
 
   const totalTickets = tickets.reduce((sum, t) => sum + t.count, 0);
 
+  const monthNames = [
+    "Januar", "Februar", "März", "April", "Mai", "Juni",
+    "Juli", "August", "September", "Oktober", "November", "Dezember"
+  ];
+
+  // Перетворюємо рядок дати на Date, щоб отримати місяць
+  const concertDate = new Date(concert.date); // concert.date має бути валідною датою
+  const month = monthNames[concertDate.getMonth()]; // getMonth() повертає 0-11
+
+  const concertDateNeeded = new Date(concert.date);
+  const options = { day: 'numeric', month: 'long' };
+  const formattedDate = concertDateNeeded.toLocaleDateString('de-DE', options); // німецька локалізація
+
   return (
     <div className="ticket-description">
       {/* Блок із дот і написом */}
       <h2 className="ticket-title"><span className="ticket-dot"></span> BESCHREIBUNG</h2>
 
       {/* Заголовок концерту */}
-      <h3 className="concert-header">Februar in Berlin – Lady Gaga Live!</h3>
+      <h3 className="concert-header">{month} in {concert.country} – {concert.name} Live!</h3>
 
       {/* Опис концерту */}
       <p>
-        Bereite dich auf eine außergewöhnliche Nacht mit der einzigartigen <strong>Lady Gaga</strong> vor – der internationalen Pop-Ikone, 
-        die mit ihrer Stimme, Kreativität und grenzenloser Energie die Musikwelt revolutioniert hat. 
-        Ein Konzert von Lady Gaga ist weit mehr als nur Musik – es ist eine spektakuläre Show voller Emotionen, Mode, Tanz und visueller Kunst. 
-        Jede Performance wird zu einem unvergesslichen Erlebnis, das Herz, Seele und Sinne gleichermaßen berührt.
+        Bereite dich auf eine außergewöhnliche Nacht mit der einzigartigen {concert.name} vor – 
+        einer internationalen Musikikone, die mit ihrer Stimme, Kreativität und Energie die Bühne beherrscht. 
+        Ein Konzert von {concert.name} ist weit mehr als nur Musik – es ist eine spektakuläre Show voller Emotionen, Tanz und visueller Kunst.
       </p>
 
       <p>
-        Mit unzähligen Welthits wie <em>„Bad Romance“</em>, <em>„Poker Face“</em>, <em>„Shallow“</em> und <em>„Rain On Me“</em> begeistert Lady Gaga Fans auf der ganzen Welt. 
-        Ihre Bühnenauftritte vereinen beeindruckende Choreografien, kraftvolle Vocals und atemberaubende Kostüme zu einer explosiven Mischung aus Glamour, Energie und Emotion.
+        Mit zahlreichen Hits begeistert {concert.name} Fans auf der ganzen Welt. 
+        Die Bühnenauftritte verbinden beeindruckende Choreografien, kraftvolle Vocals und atemberaubende Kostüme zu einem unvergesslichen Erlebnis aus Energie, Glamour und Emotion.
       </p>
 
       <p className="last-p">
-        Am 5. Februar verwandelt Lady Gaga die <strong>Uber Arena in Berlin</strong> in eine Bühne voller Magie und Leidenschaft. 
-        Erlebe ihre unverwechselbare Präsenz live – ein Abend, der Pop, Kunst und pure Power vereint. 
-        Verpasse nicht dieses einmalige Ereignis – <strong>Lady Gaga Live in Berlin!</strong>
+        Am {formattedDate} verwandelt {concert.name} die {concert.location} in eine Bühne voller Magie und Leidenschaft. 
+        Erlebe die unverwechselbare Präsenz von {concert.name} live – ein Abend, der Musik, Kunst und pure Power vereint. 
+        Verpasse nicht dieses einmalige Ereignis!
       </p>
 
       {/* Блок з квитками */}

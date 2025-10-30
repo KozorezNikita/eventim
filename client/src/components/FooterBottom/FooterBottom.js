@@ -8,7 +8,7 @@ export default function FooterBottom() {
       {/* Лівий блок */}
       <div className="footer-left">
         <span>©2025 eventim</span>
-        <Link to="/privacy" className="privacy-link">Privacy Policy</Link>
+        <Link to="/datenschutz" className="privacy-link">Datenschutz</Link>
       </div>
 
       {/* Центр */}

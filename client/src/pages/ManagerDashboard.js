@@ -10,8 +10,8 @@ export default function ManagerDashboard() {
     date: "",
     price: "",
     picture: "",
-    gumroad: "" // нове поле
-});
+    gumroad: ""
+  });
 
   const [authenticated, setAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
@@ -20,6 +20,7 @@ export default function ManagerDashboard() {
   const [concerts, setConcerts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [editingId, setEditingId] = useState(null); // <--- ID концерту, який редагується
 
   // Fetch concerts on mount
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function ManagerDashboard() {
   }, []);
 
   const handleChange = (field, value) => {
-    setArtistData(prev => ({ ...prev, [field]: value }));
+    setArtistData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSave = async () => {
@@ -44,29 +45,43 @@ export default function ManagerDashboard() {
     setMessage("");
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/concerts`, {
-        method: "POST",
+      const method = editingId ? "PUT" : "POST";
+      const url = editingId
+        ? `${API_BASE_URL}/api/concerts/${editingId}`
+        : `${API_BASE_URL}/api/concerts`;
+
+      const response = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(artistData)
+        body: JSON.stringify(artistData),
       });
 
       if (!response.ok) throw new Error(`Error: ${response.status}`);
       const data = await response.json();
 
-      // Add new concert to list
-      setConcerts(prev => [...prev, data]);
+      if (editingId) {
+        // 🔄 Оновлюємо концерт у списку
+        setConcerts((prev) =>
+          prev.map((c) => (c.id === editingId ? data : c))
+        );
+        setMessage("Concert updated successfully!");
+      } else {
+        // ➕ Додаємо новий концерт
+        setConcerts((prev) => [...prev, data]);
+        setMessage("Concert saved successfully!");
+      }
 
-      // Reset form
+      // 🔁 Скидаємо форму
       setArtistData({
         name: "",
         country: "",
         location: "",
         date: "",
         price: "",
-        picture: ""
+        picture: "",
+        gumroad: "",
       });
-
-      setMessage("Concert saved successfully!");
+      setEditingId(null);
     } catch (err) {
       console.error(err);
       setMessage("Failed to save concert.");
@@ -75,14 +90,30 @@ export default function ManagerDashboard() {
     }
   };
 
+  const handleEdit = (concert) => {
+    setArtistData({
+      name: concert.name,
+      country: concert.country,
+      location: concert.location,
+      date: concert.date,
+      price: concert.price,
+      picture: concert.picture,
+      gumroad: concert.gumroad,
+    });
+    setEditingId(concert.id);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // прокрутка до форми
+  };
+
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this concert?")) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/concerts/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE_URL}/api/concerts/${id}`, {
+        method: "DELETE",
+      });
       if (!res.ok) throw new Error("Failed to delete concert");
 
-      setConcerts(prev => prev.filter(c => c.id !== id));
+      setConcerts((prev) => prev.filter((c) => c.id !== id));
       setMessage("Concert deleted successfully!");
     } catch (err) {
       console.error(err);
@@ -90,32 +121,30 @@ export default function ManagerDashboard() {
     }
   };
 
-    if (!authenticated) {
-      return (
-        <div className="password-protect">
-          <h2>Enter password to access Manager Dashboard</h2>
-          <input
-            type="text"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            placeholder="Password"
-          />
-          <button
-            onClick={() => {
-              if (passwordInput === PASSWORD) {
-                setAuthenticated(true);
-              } else {
-                alert("Incorrect password");
-              }
-            }}
-          >
-            Enter
-          </button>
-        </div>
-      );
-    }
-
-  
+  if (!authenticated) {
+    return (
+      <div className="password-protect">
+        <h2>Enter password to access Manager Dashboard</h2>
+        <input
+          type="text"
+          value={passwordInput}
+          onChange={(e) => setPasswordInput(e.target.value)}
+          placeholder="Password"
+        />
+        <button
+          onClick={() => {
+            if (passwordInput === PASSWORD) {
+              setAuthenticated(true);
+            } else {
+              alert("Incorrect password");
+            }
+          }}
+        >
+          Enter
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="manager-dashboard">
@@ -125,7 +154,10 @@ export default function ManagerDashboard() {
         {/* Фото артиста */}
         <div className="photo-section">
           <img
-            src={artistData.picture || "https://thenounproject.com/icon/1093117/"}
+            src={
+              artistData.picture ||
+              "https://cdn-icons-png.flaticon.com/512/847/847969.png"
+            }
             alt={artistData.name || "Artist"}
           />
           <input
@@ -176,12 +208,37 @@ export default function ManagerDashboard() {
           />
         </div>
 
-        {/* Кнопка збереження */}
+        {/* Кнопки дій */}
         <div className="actions">
           <button className="save-btn" onClick={handleSave} disabled={loading}>
-            {loading ? "Saving..." : "Save"}
+            {loading
+              ? "Saving..."
+              : editingId
+              ? "Update Concert"
+              : "Save Concert"}
           </button>
+
+          {editingId && (
+            <button
+              className="cancel-btn"
+              onClick={() => {
+                setArtistData({
+                  name: "",
+                  country: "",
+                  location: "",
+                  date: "",
+                  price: "",
+                  picture: "",
+                  gumroad: "",
+                });
+                setEditingId(null);
+              }}
+            >
+              Cancel Edit
+            </button>
+          )}
         </div>
+
         {message && <p className="message">{message}</p>}
       </div>
 
@@ -194,9 +251,14 @@ export default function ManagerDashboard() {
               <p><strong>{concert.name}</strong></p>
               <p>{concert.location}, {concert.country}</p>
               <p>{concert.date} — €{concert.price}</p>
-              <p>{concert.gumroad}</p>
+              <a href={concert.gumroad} target="_blank" rel="noreferrer">
+                {concert.gumroad}
+              </a>
             </div>
-            <button className="delete-btn" onClick={() => handleDelete(concert.id)}>Delete</button>
+            <div className="concert-actions">
+              <button className="edit-btn" onClick={() => handleEdit(concert)}>Edit</button>
+              <button className="delete-btn" onClick={() => handleDelete(concert.id)}>Delete</button>
+            </div>
           </div>
         ))}
       </div>
