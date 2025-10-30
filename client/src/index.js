@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from './context/CartContext';
-import ScrollToTop from './components/ScrollTotop/ScrollToTop';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +12,6 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <CartProvider>
-      <ScrollToTop />
       <App />
       </CartProvider>
     </BrowserRouter>

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.aece4412.css",
-    "main.js": "/static/js/main.0e4dbf8d.js",
+    "main.js": "/static/js/main.3894d88f.js",
     "static/js/453.a3c1d153.chunk.js": "/static/js/453.a3c1d153.chunk.js",
     "static/media/findTicket.jpg": "/static/media/findTicket.f8897986d32895dd1458.jpg",
     "static/media/ticketmaster.png": "/static/media/ticketmaster.e99058b368c75da44053.png",
@@ -10,11 +10,11 @@
     "static/media/logo.svg": "/static/media/logo.05761dd5fb5dbd7f9c7795ad8c5fb083.svg",
     "index.html": "/index.html",
     "main.aece4412.css.map": "/static/css/main.aece4412.css.map",
-    "main.0e4dbf8d.js.map": "/static/js/main.0e4dbf8d.js.map",
+    "main.3894d88f.js.map": "/static/js/main.3894d88f.js.map",
     "453.a3c1d153.chunk.js.map": "/static/js/453.a3c1d153.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.aece4412.css",
-    "static/js/main.0e4dbf8d.js"
+    "static/js/main.3894d88f.js"
   ]
 }
