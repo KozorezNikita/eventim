@@ -43,11 +43,11 @@ export default function Cart() {
   const totalSum = cartItems.reduce((sum, item) => sum + Number(item.totalPrice), 0);
 
   const isFormValid =
-  formData.firstName.trim() &&
-  formData.lastName.trim() &&
-  formData.phone.trim() &&
-  formData.email.trim() &&
-  agreed;
+    formData.firstName.trim() &&
+    formData.lastName.trim() &&
+    formData.phone.trim() &&
+    formData.email.trim() &&
+    agreed;
 
   return (
     <div className="cart-page">
@@ -58,7 +58,7 @@ export default function Cart() {
       <div className="cart-content">
         {/* Ліва колонка: контактна інформація */}
         <div className="cart-contact-info">
-          <h3 className="cart-section-title">KONTAKINFORMATIONEN</h3>
+          <h1 className="cart-section-title">KONTAKINFORMATIONEN</h1>
           <form className="cart-contact-form">
             <input
               className="cart-input"
@@ -77,7 +77,7 @@ export default function Cart() {
             <input
               className="cart-input"
               type="text"
-              placeholder="Phone"
+              placeholder="Phone (z.B. +49 30 123 4567)"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             />
@@ -97,9 +97,9 @@ export default function Cart() {
         {/* Права колонка: кошик */}
         <div className="cart-items">
           <div className="cart-header">
-            <h4 className="cart-popular-title">
+            <h1 className="cart-popular-title-two">
               <span className="cart-dot"></span> AUSGEWÄHLTE TICKETS
-            </h4>
+            </h1>
 
             {/* Десктопна кнопка */}
             <button className="cart-clear-btn desktop-only" onClick={handleClearCart}>

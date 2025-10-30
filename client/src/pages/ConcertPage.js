@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { API_BASE_URL } from "../config/config";
 import { FiCalendar, FiMapPin } from "react-icons/fi";
@@ -21,12 +21,23 @@ export default function ConcertPage() {
       .catch((err) => setError(err.message));
   }, [id]);
 
+  const ticketsRef = useRef(null); // реф на блок TICKETS
+
+  const scrollToTickets = () => {
+    if (ticketsRef.current) {
+      ticketsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   if (error) return <p>Error: {error}</p>;
+
+  
+  
 
   return (
     <div className="page">
-     <TicketInfo concert={concert} />
-     <TicketDesc concert={concert}/>
+     <TicketInfo concert={concert} onShowTickets={scrollToTickets} />
+      <TicketDesc concert={concert} ticketsRef={ticketsRef} />
     </div>
   );
 }

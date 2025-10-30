@@ -3,7 +3,7 @@ import "./TicketDesc.css";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
-export default function TicketDesc({ concert }) {
+export default function TicketDesc({ concert, ticketsRef }) {
   const navigate = useNavigate();
   const { addToCart, clearCart } = useCart();
   const [tickets, setTickets] = useState([{ name: "P1", count: 0, priceFactor: 1 }]);
@@ -98,7 +98,7 @@ export default function TicketDesc({ concert }) {
       </p>
 
       <h2 className="ticket-title">
-        <span className="ticket-dot"></span> TICKETS
+        <span className="ticket-dot" ref={ticketsRef}></span> TICKETS
       </h2>
 
       <div className="ticket-options">

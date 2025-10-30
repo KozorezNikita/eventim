@@ -231,6 +231,10 @@
   background-color: #e04e52;
 }
 
+.cart-popular-title-two {
+  font-size: 24px;
+}
+
 /* Адаптив */
 @media (max-width: 420px) {
   .cart-content {
@@ -264,6 +268,7 @@
     width: 100%;
     max-width: 200px;
     height: auto;
+    margin-top: 15px;
     margin-bottom: 8px;
   }
 
@@ -283,6 +288,8 @@
   .cart-popular-title {
     font-size: 24px;
   }
+
+  
 
   .cart-section-title {
     font-size: 18px;

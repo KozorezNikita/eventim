@@ -1,6 +1,9 @@
 import React from "react";
 import "./FooterBottom.css";
 import { Link } from "react-router-dom";
+import telegram from "../../assets/telegram.png";
+import visaFoot from "../../assets/visaFoot.png";
+import masterFoot from "../../assets/masterFoot.png";
 
 export default function FooterBottom() {
   return (
@@ -14,14 +17,14 @@ export default function FooterBottom() {
       {/* Центр */}
       <div className="footer-center">
         <span>We accept:</span>
-        <img src="https://images.seeklogo.com/logo-png/14/2/visa-logo-png_seeklogo-149686.png" alt="Visa" width="40" height="auto" />
-        <img src="https://image.shutterstock.com/image-photo/image-260nw-2357100277.jpg" alt="Mastercard" width="40" height="auto" />
+        <img src={visaFoot} alt="Visa" width="35" height="50" />
+        <img src={masterFoot} alt="Mastercard" width="35" height="50" />
       </div>
 
       {/* Правий блок */}
       <div className="footer-right">
         <a href="https://t.me/your_channel" target="_blank" rel="noopener noreferrer">
-          <img src="https://image.shutterstock.com/image-photo/image-260nw-1081329404.jpg" alt="Telegram" width="40" height="auto" />
+          <img src={telegram} alt="Telegram" width="24" height="24" />
         </a>
       </div>
     </div>

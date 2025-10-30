@@ -13,9 +13,9 @@ export default function Contacts() {
 
       <div className="contacts-right">
         <h3>Kontakt</h3>
-        <p>eventin@gmail.com</p>
+        <p>eventim@gmail.com</p>
         <h3>ADDRESS</h3>
-        <p>Warsaw, ul. Marszałkowska 7</p>
+        <p>Berlin, Friedrichstraße 7</p>
       </div>
     </footer>
   );

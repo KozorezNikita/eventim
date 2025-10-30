@@ -3,7 +3,7 @@ import { FiCalendar, FiMapPin } from "react-icons/fi";
 import { FaCoins } from "react-icons/fa";
 import "./TicketInfo.css";
 
-export default function TicketInfo({ concert }) {
+export default function TicketInfo({ concert, onShowTickets }) {
   return (
     concert && (
       <div className="ticketinfo-container">
@@ -31,7 +31,7 @@ export default function TicketInfo({ concert }) {
             <FaCoins style={{ marginRight: "6px", verticalAlign: "middle" }} />
             €{concert.price}
           </p>
-          <button className="ticketinfo-buy-btn">Tickets anzeigen</button>
+          <button className="ticketinfo-buy-btn" onClick={onShowTickets}>Tickets anzeigen</button>
         </div>
       </div>
     )
