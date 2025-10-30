@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.eb8362da.css",
+    "main.css": "/static/css/main.bf7f505a.css",
     "main.js": "/static/js/main.b869b230.js",
     "static/js/453.a3c1d153.chunk.js": "/static/js/453.a3c1d153.chunk.js",
     "static/media/findTicket.jpg": "/static/media/findTicket.f8897986d32895dd1458.jpg",
@@ -9,12 +9,12 @@
     "static/media/dzbank.png": "/static/media/dzbank.63ba23d58fdbd8bdd493.png",
     "static/media/logo.svg": "/static/media/logo.05761dd5fb5dbd7f9c7795ad8c5fb083.svg",
     "index.html": "/index.html",
-    "main.eb8362da.css.map": "/static/css/main.eb8362da.css.map",
+    "main.bf7f505a.css.map": "/static/css/main.bf7f505a.css.map",
     "main.b869b230.js.map": "/static/js/main.b869b230.js.map",
     "453.a3c1d153.chunk.js.map": "/static/js/453.a3c1d153.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb8362da.css",
+    "static/css/main.bf7f505a.css",
     "static/js/main.b869b230.js"
   ]
 }

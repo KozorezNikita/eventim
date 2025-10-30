@@ -29,8 +29,8 @@
 }
 
 .photo-section img {
-  width: 150px;
-  height: 150px;
+  width: 100px; /* зменшене фото артиста */
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid #ddd;
@@ -85,16 +85,18 @@
 
 .concert-item {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   gap: 12px;
   padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
+  flex-wrap: wrap;
 }
 
 .concert-item img {
-  width: 80px;
+  width: 80px; /* зменшене фото концерту */
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
@@ -102,23 +104,59 @@
 }
 
 .concert-info {
-  flex: 1;
+  flex: 1 1 200px;
+  word-break: break-word;
+}
+
+.concert-info p {
+  margin: 2px 0;
+}
+
+.concert-info a {
+  color: #1a73e8;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.concert-info a:hover {
+  text-decoration: underline;
 }
 
 .concert-item .delete-btn {
-  padding: 4px 10px;
+  align-self: flex-start;
+  padding: 8px 16px; /* більша кнопка */
   border: none;
   border-radius: 6px;
   background-color: #e74c3c;
   color: white;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
 }
 
+/* Медіа-запит для екранів до 420px */
+@media (max-width: 420px) {
+  .concert-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
+  .concert-item img {
+    width: 100px; /* трохи більша для мобільних */
+    height: auto;
+  }
 
+  .concert-info {
+    width: 100%;
+  }
 
+  .concert-item .delete-btn {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
 
-
+/* Password-protect screen */
 .password-protect {
   display: flex;
   flex-direction: column;
@@ -174,4 +212,50 @@
 .password-protect button:active {
   transform: translateY(0);
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+
+
+.concert-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* вирівнюємо по центру висоти */
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  flex-wrap: nowrap; /* забороняємо перенос у десктопі */
+}
+
+.concert-info {
+  flex: 1 1 auto; /* займає лише потрібне місце */
+  word-break: break-word;
+}
+
+.concert-item .delete-btn {
+  flex-shrink: 0; /* не стискається */
+  align-self: center; /* по центру висоти */
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e74c3c;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Мобільні: flex-wrap дозволяємо, кнопка під текстом */
+@media (max-width: 420px) {
+  .concert-item {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .concert-item .delete-btn {
+    width: 100%;
+    margin-top: 8px;
+  }
 }
