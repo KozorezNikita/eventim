@@ -6,15 +6,25 @@ import { useNavigate } from "react-router-dom";
 export default function TicketDesc({ concert }) {
   const navigate = useNavigate();
   const { addToCart, clearCart } = useCart();
-  const [tickets, setTickets] = useState([
-    { name: "P1", count: 0, priceFactor: 1 },
-  ]);
+  const [tickets, setTickets] = useState([{ name: "P1", count: 0, priceFactor: 1 }]);
 
-  /*const [tickets, setTickets] = useState([
-    { name: "P3", count: 0, priceFactor: 3.2 },
-    { name: "P2", count: 0, priceFactor: 2.3 },
-    { name: "P1", count: 0, priceFactor: 1 },
-  ]);*/
+  // ⛔ Перевірка перед будь-яким доступом до concert.date
+  if (!concert) {
+    return <div className="ticket-description">Loading...</div>;
+  }
+
+  // Якщо concert існує — тоді вже можемо працювати з датою
+  const concertDate = concert?.date ? new Date(concert.date) : null;
+
+  const monthNames = [
+    "Januar", "Februar", "März", "April", "Mai", "Juni",
+    "Juli", "August", "September", "Oktober", "November", "Dezember"
+  ];
+
+  const month = concertDate ? monthNames[concertDate.getMonth()] : "";
+  const formattedDate = concertDate
+    ? concertDate.toLocaleDateString("de-DE", { day: "numeric", month: "long" })
+    : "";
 
   const increment = (index) => {
     const newTickets = [...tickets];
@@ -31,82 +41,65 @@ export default function TicketDesc({ concert }) {
   };
 
   const handleAddToCart = () => {
-  if (!concert) return;
+    if (!concert) return;
 
-  const selected = tickets
-    .filter(t => t.count > 0)
-    .map(t => ({
-      concertId: concert.id,
-      concertName: concert.name,
-      concertPicture: concert.picture,
-      concertCity: concert.country,
-      concertLocation: concert.location,
-      concertDate: concert.date,
-      type: t.name,
-      count: t.count,
-      gumroad: concert.gumroad,
-      price: (concert.price / t.priceFactor).toFixed(2),
-      totalPrice: (t.count * (concert.price / t.priceFactor)).toFixed(2),
-    }));
+    const selected = tickets
+      .filter(t => t.count > 0)
+      .map(t => ({
+        concertId: concert.id,
+        concertName: concert.name,
+        concertPicture: concert.picture,
+        concertCity: concert.country,
+        concertLocation: concert.location,
+        concertDate: concert.date,
+        type: t.name,
+        count: t.count,
+        gumroad: concert.gumroad,
+        price: (concert.price / t.priceFactor).toFixed(2),
+        totalPrice: (t.count * (concert.price / t.priceFactor)).toFixed(2),
+      }));
 
-  if (selected.length === 0) return;
+    if (selected.length === 0) return;
 
-  // Спочатку очищаємо кошик
-  clearCart();
-
-  // Потім додаємо нові товари
-  addToCart(selected);
-
-  console.log("Кошик оновлено:", selected);
-
-  // Скидаємо лічильники квитків
-  setTickets(tickets.map(t => ({ ...t, count: 0 })));
-  navigate("/cart");
-};
+    clearCart();
+    addToCart(selected);
+    setTickets(tickets.map(t => ({ ...t, count: 0 })));
+    navigate("/cart");
+  };
 
   const totalTickets = tickets.reduce((sum, t) => sum + t.count, 0);
 
-  const monthNames = [
-    "Januar", "Februar", "März", "April", "Mai", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "Dezember"
-  ];
-
-  // Перетворюємо рядок дати на Date, щоб отримати місяць
-  const concertDate = new Date(concert.date); // concert.date має бути валідною датою
-  const month = monthNames[concertDate.getMonth()]; // getMonth() повертає 0-11
-
-  const concertDateNeeded = new Date(concert.date);
-  const options = { day: 'numeric', month: 'long' };
-  const formattedDate = concertDateNeeded.toLocaleDateString('de-DE', options); // німецька локалізація
-
   return (
     <div className="ticket-description">
-      {/* Блок із дот і написом */}
-      <h2 className="ticket-title"><span className="ticket-dot"></span> BESCHREIBUNG</h2>
+      <h2 className="ticket-title">
+        <span className="ticket-dot"></span> BESCHREIBUNG
+      </h2>
 
-      {/* Заголовок концерту */}
-      <h3 className="concert-header">{month} in {concert.country} – {concert.name} Live!</h3>
+      <h3 className="concert-header">
+        {month} in {concert.country} – {concert.name} Live!
+      </h3>
 
-      {/* Опис концерту */}
       <p>
-        Bereite dich auf eine außergewöhnliche Nacht mit der einzigartigen {concert.name} vor – 
-        einer internationalen Musikikone, die mit ihrer Stimme, Kreativität und Energie die Bühne beherrscht. 
+        Bereite dich auf eine außergewöhnliche Nacht mit der einzigartigen {concert.name} vor –
+        einer internationalen Musikikone, die mit ihrer Stimme, Kreativität und Energie die Bühne beherrscht.
         Ein Konzert von {concert.name} ist weit mehr als nur Musik – es ist eine spektakuläre Show voller Emotionen, Tanz und visueller Kunst.
       </p>
 
       <p>
-        Mit zahlreichen Hits begeistert {concert.name} Fans auf der ganzen Welt. 
-        Die Bühnenauftritte verbinden beeindruckende Choreografien, kraftvolle Vocals und atemberaubende Kostüme zu einem unvergesslichen Erlebnis aus Energie, Glamour und Emotion.
+        Mit zahlreichen Hits begeistert {concert.name} Fans auf der ganzen Welt.
+        Die Bühnenauftritte verbinden beeindruckende Choreografien, kraftvolle Vocals und atemberaubende Kostüme
+        zu einem unvergesslichen Erlebnis aus Energie, Glamour und Emotion.
       </p>
 
       <p className="last-p">
-        Am {formattedDate} verwandelt {concert.name} die {concert.location} in eine Bühne voller Magie und Leidenschaft. 
-        Erlebe die unverwechselbare Präsenz von {concert.name} live – ein Abend, der Musik, Kunst und pure Power vereint. 
+        Am {formattedDate} verwandelt {concert.name} die {concert.location} in eine Bühne voller Magie und Leidenschaft.
+        Erlebe die unverwechselbare Präsenz von {concert.name} live – ein Abend, der Musik, Kunst und pure Power vereint.
         Verpasse nicht dieses einmalige Ereignis!
       </p>
 
-      {/* Блок з квитками */}
-      <h2 className="ticket-title"><span className="ticket-dot"></span> TICKETS</h2>
+      <h2 className="ticket-title">
+        <span className="ticket-dot"></span> TICKETS
+      </h2>
 
       <div className="ticket-options">
         {tickets.map((ticket, index) => (
