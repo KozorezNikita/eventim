@@ -292,11 +292,9 @@ const concerts = [
 ];
 
 
-
 async function migrate() {
   try {
-    // 1️⃣ Створюємо таблицю, якщо її немає
-    console.log("Checking if table exists...");
+    console.log("🔍 Перевірка наявності таблиці...");
     await pool.query(`
       CREATE TABLE IF NOT EXISTS concerts (
         id SERIAL PRIMARY KEY,
@@ -309,8 +307,14 @@ async function migrate() {
       );
     `);
 
-    // 2️⃣ Додаємо колонку gumroad, якщо її немає
-    console.log("Checking for 'gumroad' column...");
+    console.log("🔍 Перевірка типу колонки 'date'...");
+    await pool.query(`
+      ALTER TABLE concerts
+      ALTER COLUMN date TYPE TEXT
+      USING date::text;
+    `);
+
+    console.log("🔍 Перевірка наявності колонки 'gumroad'...");
     const colCheck = await pool.query(`
       SELECT column_name 
       FROM information_schema.columns 
@@ -318,20 +322,23 @@ async function migrate() {
     `);
 
     if (colCheck.rows.length === 0) {
-      console.log("Adding column 'gumroad'...");
+      console.log("➕ Додаємо колонку 'gumroad'...");
       await pool.query(`
-        ALTER TABLE concerts 
+        ALTER TABLE concerts
         ADD COLUMN gumroad TEXT NOT NULL DEFAULT '';
       `);
     }
 
-    // 3️⃣ Очищаємо старі записи
-    console.log("Clearing old data...");
+    console.log("🧹 Очищаємо старі записи...");
     await pool.query("DELETE FROM concerts;");
 
-    // 4️⃣ Вставляємо всі концерти
-    console.log("Inserting concerts...");
+    console.log("📥 Вставляємо нові концерти...");
     for (const concert of concerts) {
+      // гарантуємо, що date — це текст
+      const dateText = typeof concert.date === "string"
+        ? concert.date
+        : new Date(concert.date).toISOString().split("T")[0];
+
       await pool.query(
         `
         INSERT INTO concerts (name, country, location, date, price, picture, gumroad)
@@ -341,7 +348,7 @@ async function migrate() {
           concert.name,
           concert.country,
           concert.location,
-          concert.date,
+          dateText,
           concert.price,
           concert.picture,
           concert.gumroad,
@@ -349,9 +356,9 @@ async function migrate() {
       );
     }
 
-    console.log(`✅ Successfully migrated ${concerts.length} concerts.`);
+    console.log(`✅ Успішно мігровано ${concerts.length} концертів.`);
   } catch (err) {
-    console.error("❌ Migration failed:", err);
+    console.error("❌ Помилка міграції:", err);
   } finally {
     await pool.end();
   }
