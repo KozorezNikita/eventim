@@ -45,5 +45,6 @@ create TABLE concerts(
     location VARCHAR(255) NOT NULL,
     date TEXT NOT NULL,
     price DECIMAL NOT NULL,
-    picture  TEXT NOT NULL
+    picture  TEXT NOT NULL, 
+    gumroad TEXT NOT NULL
 );
