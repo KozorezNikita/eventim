@@ -303,7 +303,7 @@ async function migrate() {
         name VARCHAR(255) NOT NULL,
         country VARCHAR(255) NOT NULL,
         location VARCHAR(255) NOT NULL,
-        date DATE NOT NULL,
+        date TEXT NOT NULL,
         price VARCHAR(50) NOT NULL,
         picture TEXT NOT NULL
       );
