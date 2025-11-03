@@ -2,7 +2,7 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  connectionString: "postgres://ucj4d7v8jjabf1:p542d5005866e81572ef70673531563a9931f365622e91376f4d2b7f6d59c30b2@casrkuuedp6an1.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dd7hhoolvc7ccj?sslmode=require",
+  connectionString: "postgres://u8rontnmf4babp:pf23d36c6b50903849c080965ee1e64f8bf94ee1443029329e9a51e80fd479f4b@c9n6qtf5jru089.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dab64o4kt3q458?sslmode=require",
   ssl: { rejectUnauthorized: false },
 });
 
@@ -292,9 +292,25 @@ const concerts = [
 ];
 
 
+
 async function migrate() {
   try {
-    // 1. Додаємо колонку gumroad, якщо її немає
+    // 1️⃣ Створюємо таблицю, якщо її немає
+    console.log("Checking if table exists...");
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS concerts (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        country VARCHAR(255) NOT NULL,
+        location VARCHAR(255) NOT NULL,
+        date DATE NOT NULL,
+        price VARCHAR(50) NOT NULL,
+        picture TEXT NOT NULL
+      );
+    `);
+
+    // 2️⃣ Додаємо колонку gumroad, якщо її немає
+    console.log("Checking for 'gumroad' column...");
     const colCheck = await pool.query(`
       SELECT column_name 
       FROM information_schema.columns 
@@ -305,24 +321,35 @@ async function migrate() {
       console.log("Adding column 'gumroad'...");
       await pool.query(`
         ALTER TABLE concerts 
-        ADD COLUMN gumroad TEXT NOT NULL DEFAULT 'https://motewewale.gumroad.com/l/apache207_dortmund?wanted=true';
+        ADD COLUMN gumroad TEXT NOT NULL DEFAULT '';
       `);
     }
 
-    // 2. Очищаємо старі записи (за бажанням)
+    // 3️⃣ Очищаємо старі записи
     console.log("Clearing old data...");
     await pool.query("DELETE FROM concerts;");
 
-    // 3. Вставляємо всі концерти з gumroad
+    // 4️⃣ Вставляємо всі концерти
+    console.log("Inserting concerts...");
     for (const concert of concerts) {
       await pool.query(
-        `INSERT INTO concerts (name, country, location, date, price, picture, gumroad)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [concert.name, concert.country, concert.location, concert.date, concert.price, concert.picture, concert.gumroad]
+        `
+        INSERT INTO concerts (name, country, location, date, price, picture, gumroad)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `,
+        [
+          concert.name,
+          concert.country,
+          concert.location,
+          concert.date,
+          concert.price,
+          concert.picture,
+          concert.gumroad,
+        ]
       );
     }
 
-    console.log(`✅ Successfully migrated ${concerts.length} concerts with gumroad`);
+    console.log(`✅ Successfully migrated ${concerts.length} concerts.`);
   } catch (err) {
     console.error("❌ Migration failed:", err);
   } finally {
