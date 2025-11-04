@@ -2,21 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import "./CustomDatePicker.css";
 
 const months = [
-  "Januar",
-  "Februar",
-  "März",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Dezember"
+  "Januar","Februar","März","April","Mai","Juni",
+  "Juli","August","September","Oktober","November","Dezember"
 ];
 
-export default function CustomDatePicker() {
+export default function CustomDatePicker({ highlightDates, onDateChange }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [open, setOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -40,9 +30,12 @@ export default function CustomDatePicker() {
   };
 
   const handleDateClick = (day) => {
-    setSelectedDate(new Date(currentYear, currentMonth, day));
-    setOpen(false);
-  };
+  const newDate = new Date(currentYear, currentMonth, day);
+  setSelectedDate(newDate);
+  setOpen(false);
+
+  if (onDateChange) onDateChange(newDate); // ← це дуже важливо
+};
 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
@@ -61,10 +54,16 @@ export default function CustomDatePicker() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Функція для форматування дати YYYY-MM-DD
+  const formatDate = (year, month, day) => {
+    const m = (month + 1).toString().padStart(2, "0");
+    const d = day.toString().padStart(2, "0");
+    return `${year}-${m}-${d}`;
+  };
+
   return (
     <div className="datepicker-wrapper" ref={wrapperRef}>
       <div className="custom-input" onClick={toggleCalendar}>
-        {/* Ліва іконка календаря */}
         <span className="calendar-icon-left">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#282828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -80,7 +79,6 @@ export default function CustomDatePicker() {
             : "Datum"}
         </span>
 
-        {/* Права стрілка */}
         <span className={`arrow-icon ${open ? 'open' : ''}`}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#282828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
@@ -111,20 +109,27 @@ export default function CustomDatePicker() {
           </div>
 
           <div className="dates-grid">
-            {dates.map((d, idx) => (
-              <div
-                key={idx}
-                className={`date-cell ${
-                  selectedDate &&
-                  d === selectedDate.getDate() &&
-                  currentMonth === selectedDate.getMonth() &&
-                  currentYear === selectedDate.getFullYear() ? 'selected' : ''
-                }`}
-                onClick={() => d && handleDateClick(d)}
-              >
-                {d}
-              </div>
-            ))}
+            {dates.map((d, idx) => {
+              if (!d) return <div key={idx} className="date-cell empty"></div>;
+
+              const dayString = formatDate(currentYear, currentMonth, d);
+              const isHighlighted = highlightDates?.includes(dayString);
+
+              return (
+                <div
+                  key={idx}
+                  className={`date-cell ${
+                    selectedDate &&
+                    d === selectedDate.getDate() &&
+                    currentMonth === selectedDate.getMonth() &&
+                    currentYear === selectedDate.getFullYear() ? 'selected' : ''
+                  } ${isHighlighted ? 'highlight' : ''}`}
+                  onClick={() => handleDateClick(d)}
+                >
+                  {d}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}

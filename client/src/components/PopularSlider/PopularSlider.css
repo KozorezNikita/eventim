@@ -6,6 +6,18 @@
   font-family: "Inter", sans-serif;
 }
 
+.popular::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background: #f9f9f9;
+  z-index: -1;
+  margin-left: calc(-50vw + 50%);
+}
+
 .popular-title {
   font-family: "Inter", sans-serif;
   font-size: 48px;

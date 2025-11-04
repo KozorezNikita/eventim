@@ -16,6 +16,7 @@ export default function Cart() {
   const handleClearCart = () => {
     if (window.confirm("Are you sure you want to remove all items from the cart?")) {
       clearCart();
+      window.location.href = "/";
     }
   };
 
@@ -25,20 +26,20 @@ export default function Cart() {
       return;
     }
 
-    const totalItems = cartItems.reduce((sum, item) => sum + item.count, 0);
-    if (totalItems === 0) return;
+    if (cartItems.length === 0) return;
 
-    if (totalItems === 1) {
-      const firstItemGumroad = cartItems[0].gumroad;
-      if (firstItemGumroad) {
-        window.location.href = firstItemGumroad;
+    cartItems.forEach((item) => {
+      if (item.gumroad) {
+        const quantity = item.count || 1;
+        const separator = item.gumroad.includes("?") ? "&" : "?";
+        const gumroadLink = `${item.gumroad}${separator}quantity=${quantity}`;
+        // Відкриваємо посилання у новій вкладці
+        window.location.href = gumroadLink;
       } else {
-        alert("Payment link not available.");
+        console.warn(`Payment link not available for ${item.concertName}`);
       }
-    } else {
-      window.location.href = "/";
-    }
-  };
+    });
+};
 
   const totalSum = cartItems.reduce((sum, item) => sum + Number(item.totalPrice), 0);
 
@@ -97,9 +98,9 @@ export default function Cart() {
         {/* Права колонка: кошик */}
         <div className="cart-items">
           <div className="cart-header">
-            <h1 className="cart-popular-title-two">
+            <h2 className="cart-popular-title">
               <span className="cart-dot"></span> AUSGEWÄHLTE TICKETS
-            </h1>
+            </h2>
 
             {/* Десктопна кнопка */}
             <button className="cart-clear-btn desktop-only" onClick={handleClearCart}>

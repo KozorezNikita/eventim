@@ -68,6 +68,7 @@ export default function TicketDesc({ concert, ticketsRef }) {
   const totalTickets = tickets.reduce((sum, t) => sum + t.count, 0);
 
   return (
+    <>
     <div className="ticket-description">
       <h2 className="ticket-title">
         <span className="ticket-dot"></span> BESCHREIBUNG
@@ -116,10 +117,17 @@ export default function TicketDesc({ concert, ticketsRef }) {
           </div>
         ))}
       </div>
-
-      <button className="cart-button" onClick={handleAddToCart}>
-        Jetzt kaufen ({totalTickets})
-      </button>
     </div>
+      {/* === Панель покупки внизу екрана === */}
+      <div className="buy-panel">
+        <div className="buy-panel-content">
+          
+
+          <button className="cart-button" onClick={handleAddToCart}>
+            Jetzt kaufen ({totalTickets})
+          </button>
+        </div>
+      </div>
+      </>
   );
 }

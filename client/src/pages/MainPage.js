@@ -1,25 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../config/config"; // імпорт константи
+import { API_BASE_URL } from "../config/config";
 import PopularSlider from "../components/PopularSlider/PopularSlider";
 import Header from "../components/Header/Header";
 import FindBlock from "../components/FindBlock/FindBlock";
 import ConcertList from "../components/ConcertList/ConcertList";
-import InfoBlock from "../components/InfoBlock/InfoBlock";
-import NavFoot from "../components/Navfoot/Navfoot";
-import Contacts from "../components/Contacts/Contacts";
-import FooterBottom from "../components/FooterBottom/FooterBottom";
-import LogoBlock from "../components/LogoBlock/LogoBlock";
 
 export default function MainPage() {
   const [concerts, setConcerts] = useState([]);
+  const [filteredConcerts, setFilteredConcerts] = useState([]);
   const [error, setError] = useState(null);
+
+  const concertListRef = useRef(null); // ← новий реф
 
   useEffect(() => {
     const fetchConcerts = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/concerts`);
         setConcerts(response.data);
+        setFilteredConcerts(response.data);
       } catch (err) {
         console.error("Error fetching concerts:", err);
         setError(err);
@@ -33,14 +32,19 @@ export default function MainPage() {
 
   return (
     <div className="page">
-      <FindBlock concerts={concerts} />
+      <FindBlock
+        concerts={concerts}
+        onFilter={(filtered, scrollToConcerts = false) => {
+          setFilteredConcerts(filtered);
+          if (scrollToConcerts && concertListRef.current) {
+            concertListRef.current.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+      />
       <PopularSlider slides={concerts.slice(0, 5)} />
-      <ConcertList eventsData={concerts} />
-      {/*<LogoBlock />*/}
-      {/*} <InfoBlock />*/}
-      {/*<NavFoot />*/}
-      {/*<Contacts />*/}
-      {/*<FooterBottom />*/}
+      <div ref={concertListRef}>
+        <ConcertList eventsData={filteredConcerts} />
+      </div>
     </div>
   );
 }

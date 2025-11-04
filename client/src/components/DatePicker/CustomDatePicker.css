@@ -132,6 +132,13 @@
 .datepicker-wrapper .date-cell.selected {
   background-color: #D31F37;
   color: white;
+  border: 3px solid black;
+}
+
+.datepicker-wrapper .date-cell.highlight {
+  background-color: #D31F37;
+  color: white;
+  font-weight: 600;
 }
 
 /* --- Мобільна адаптивність --- */

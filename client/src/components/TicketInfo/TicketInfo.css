@@ -75,7 +75,9 @@
 .ticketinfo-buy-btn {
   padding: 12px 24px;
   width: 100%;
+  min-width: 240px;
   font-size: 18px;
+  height: 50px;
   cursor: pointer;
   background-color: #D31F37;
   color: white;

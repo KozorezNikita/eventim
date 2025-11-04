@@ -4,7 +4,8 @@ import "./CustomSelect.css";
 export default function CustomSelect({
   options,
   placeholder = "Select option",
-  icon = null, // 🎵 SVG або будь-який React-елемент
+  icon = null,
+  onChange, // додаємо проп
 }) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -15,6 +16,7 @@ export default function CustomSelect({
   const handleSelect = (opt) => {
     setSelected(opt);
     setOpen(false);
+    if (onChange) onChange(opt); // викликаємо проп, якщо він переданий
   };
 
   useEffect(() => {
@@ -30,18 +32,15 @@ export default function CustomSelect({
   return (
     <div className="custom-select" ref={wrapperRef}>
       <div className="select-header search-field" onClick={toggleOpen}>
-        {/* 🎵 SVG, який прокидається через проп */}
         {icon && <span className="select-icon">{icon}</span>}
-
         <span className="select-text">{selected || placeholder}</span>
-
         <svg
           className={`arrow ${open ? "open" : ""}`}
           width="18"
           height="18"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#999"
+          stroke="#282828"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -56,7 +55,7 @@ export default function CustomSelect({
             <div
               key={i}
               className={`option ${selected === opt ? "selected" : ""}`}
-              onClick={() => handleSelect(opt)}
+              onClick={() => handleSelect(opt)} // тут викликаємо handleSelect
             >
               {opt}
             </div>
@@ -66,3 +65,4 @@ export default function CustomSelect({
     </div>
   );
 }
+

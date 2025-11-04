@@ -1,8 +1,10 @@
 /* === Hero section === */
 .hero {
   position: relative;
-  height: 600px;
-  background: url("../../assets/findTicket.jpg") center/cover no-repeat;
+  width: 100vw; /* повна ширина вікна */
+  margin-left: calc(50% - 50vw); /* вихід за межі контейнера */
+  background: url("../../assets/findTicket.jpg") center center / cover no-repeat;
+  min-height: 600px; /* або скільки потрібно по висоті */
 }
 
 .hero-overlay {
